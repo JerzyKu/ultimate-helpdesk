@@ -32,6 +32,7 @@ app.use(cookieParser())
 
 // app.use(verifyJWT)
 app.use('/employees', require('./routes/api/employees'));
+app.use('/assets', require('./routes/api/assets'))
 // app.use('/users', require('./routes/api/users'));
 
 app.all('*', (req, res) => {
