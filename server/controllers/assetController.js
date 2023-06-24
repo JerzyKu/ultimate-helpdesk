@@ -61,9 +61,6 @@ const deleteAsset = async (req, res) => {
     res.json(result);
 }
 
-
-
-
 module.exports = {
     createNewAsset,
     getAllAssets,
