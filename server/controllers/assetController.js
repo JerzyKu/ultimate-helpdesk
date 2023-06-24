@@ -14,7 +14,6 @@ const createNewAsset = async (req, res) => {
         console.log(error);
         res.status(500).json(error)
     }
-
 }
 
 const getAllAssets = async (req, res) => {
