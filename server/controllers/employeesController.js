@@ -47,7 +47,6 @@ const deleteEmployee = async (req, res) => {
         return res.status(204).json({ "message": `No employee maches: ${req.body.id}.` });
     }
     const result = await Employee.deleteOne({ _id: req.body.id })
-    // console.log("🚀 ~ file: employeesController.js:50 ~ deleteEmployee ~ result:", result)
     res.json(result);
 }
 
