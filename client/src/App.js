@@ -1,20 +1,19 @@
+import { Routes, Route } from 'react-router-dom';
+import Emplyees from './pages/Employees'
+import Assets from './pages/Assets'
+import Layout from './Layout';
+import Home from './pages/Home';
+
+
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Routes>
+      <Route path='/' element={<Layout />}>
+        <Route path='/employees' element={<Emplyees />} />
+        <Route path='/assets' element={<Assets />} />
+        <Route path='/' element={<Home />} />
+      </Route>
+    </Routes>
   );
 }
 
