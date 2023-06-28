@@ -10,7 +10,7 @@ import { faFrog } from '@fortawesome/free-solid-svg-icons'
 export default function NavbarComponent() {
     return (
         <>
-            <Navbar expand="lg" className="bg-success">
+            <Navbar expand="lg" className="bg-success mb-3">
                 <Container>
                     <Navbar.Brand as={Link} to="/"><FontAwesomeIcon icon={faFrog} bounce style={{ color: "#0b3805", }} /> Ultimate HelpDesk</Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
