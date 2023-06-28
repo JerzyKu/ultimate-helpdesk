@@ -19,6 +19,7 @@ export default function NavbarComponent() {
                             <Nav.Link as={Link} to="/" >Home</Nav.Link>
                             <Nav.Link as={Link} to="/assets" active>Assets</Nav.Link>
                             <Nav.Link as={Link} to="/employees" >Employees</Nav.Link>
+                            <Nav.Link as={Link} to="/longue" disabled>Longue</Nav.Link>
                             {/* <Nav.Link href="/assets">Assets</Nav.Link>
                             <Nav.Link href="#link">Link</Nav.Link>
                             <NavDropdown title="Dropdown" id="basic-nav-dropdown">
