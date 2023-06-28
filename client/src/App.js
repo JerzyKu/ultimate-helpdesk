@@ -4,6 +4,7 @@ import Assets from './pages/Assets'
 import Layout from './Layout';
 import Home from './pages/Home';
 import LogInPage from './pages/LogInPage';
+import NewEmployee from './pages/NewEmployee';
 
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
       <Route path='/login' element={<LogInPage />} />
       <Route path='/' element={<Layout />}>
         <Route path='/employees' element={<Emplyees />} />
+        <Route path='/employees/new' element={<NewEmployee />} />
         <Route path='/assets' element={<Assets />} />
         <Route path='/' element={<Home />} />
       </Route>
