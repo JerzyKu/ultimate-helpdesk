@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 
 import Form from 'react-bootstrap/Form';
@@ -10,6 +10,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleExclamation, faFrog } from '@fortawesome/free-solid-svg-icons'
 
 export default function LogInPage() {
+
+    const loginRef = useRef()
+
+    useEffect( () => {
+        loginRef.current.focus()
+    }, [])
+
     return (
         <Container style={{ maxWidth: '400px', margin: '0 auto' }} className="mt-5">
             <h1>
@@ -20,7 +27,7 @@ export default function LogInPage() {
             <Form>
                 <Form.Group className="mb-3" controlId="formGroupEmail">
                     <Form.Label>Email address</Form.Label>
-                    <Form.Control type="email" placeholder="Enter email" />
+                    <Form.Control type="email" placeholder="Enter email" ref={loginRef}/>
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formGroupPassword">
