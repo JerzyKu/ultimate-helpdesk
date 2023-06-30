@@ -5,22 +5,11 @@ import axios from '../api/axios';
 // bootstrap
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
+import Alert from 'react-bootstrap/Alert';
 
 // fonta awsome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
-
-const tempEmplo = [
-  { firstname: "Anna", lastname: "Nowak" },
-  { firstname: "Anna", lastname: "Nowak" },
-  { firstname: "Anna", lastname: "Nowak" },
-  { firstname: "Anna", lastname: "Nowak" },
-  { firstname: "Anna", lastname: "Nowak" },
-  { firstname: "Anna", lastname: "Nowak" },
-  { firstname: "Anna", lastname: "Nowak" },
-  { firstname: "Anna", lastname: "Nowak" },
-  { firstname: "Anna", lastname: "Nowak" }
-] 
+import { faPlus, faTriangleExclamation } from '@fortawesome/free-solid-svg-icons';
 
 export default function Employees() {
 
@@ -49,7 +38,7 @@ export default function Employees() {
       controller.abort()
     }
   }, [])
- 
+
 
   return (
     <>
@@ -57,41 +46,28 @@ export default function Employees() {
 
       <hr />
 
-      {users?.length
-        ? (
-          <ul>
-            {users.map((user, i) => {
-              return <li key={i}>{user.firstname} {user.lastname}</li>
-            })}
-          </ul>
-        ) : (
-          <p>no users to display</p>
-        )}
-
-      <hr />
-
-      <Table hover striped >
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Actioins</th>
-          </tr>
-        </thead>
-        <tbody>
-          {tempEmplo.map((el, index) => {
-            return (
-              <tr key={index}>
-                <td>{index}</td>
-                <td>{el.firstname}</td>
-                <td>{el.lastname}</td>
-                <td><Button size="sm">Actions</Button></td>
-              </tr>
-            )
-          })}
-        </tbody>
-      </Table>
+      {users?.length ?
+        <Table hover striped >
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>First Name</th>
+              <th>Last Name</th>
+              {/* <th>Actioins</th> */}
+            </tr>
+          </thead>
+          <tbody>
+            {(users.map((user, i) => {
+              return (
+                <tr key={i}>
+                  <td>{i}</td>
+                  <td>{user.firstname}</td>
+                  <td>{user.lastname}</td>
+                </tr>)
+            }))}
+          </tbody>
+        </Table>
+        : (<Alert variant={'warning'}><FontAwesomeIcon icon={faTriangleExclamation} /> No users to display</Alert>)}
     </>
   )
 }

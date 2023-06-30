@@ -35,7 +35,7 @@ export default function NavbarComponent() {
 
 function CustomLink({ to, children, ...props }) {
     const resolvedPath = useResolvedPath(to)
-    const isActive = useMatch({ path: resolvedPath.pathname, end: true })
+    const isActive = useMatch({ path: resolvedPath.pathname }) // end: true 
     return (
         <Nav.Link as={Link} to={to} {...props} active={isActive}>{children}</Nav.Link>
     )
