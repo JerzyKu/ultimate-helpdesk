@@ -7,6 +7,8 @@ import LogInPage from './pages/LogInPage';
 import NewEmployee from './pages/NewEmployee';
 import Longue from './pages/Longue';
 import Account from './pages/Account';
+import NewAsset from './pages/NewAsset';
+import Asset from './pages/Asset';
 
 
 function App() {
@@ -17,6 +19,8 @@ function App() {
         <Route path='/employees' element={<Emplyees />} />
         <Route path='/employees/new' element={<NewEmployee />} />
         <Route path='/assets' element={<Assets />} />
+        <Route path='/assets/new' element={<NewAsset />} />
+        <Route path='/assets/:id' element={<Asset />} />
         <Route path='/longue' element={<Longue />} />
         <Route path='/account' element={<Account />} />
         <Route path='/' element={<Home />} />
