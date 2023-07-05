@@ -26,11 +26,19 @@ const getAsset = async (req, res) => {
     if (!req?.params?.id) {
         return res.status(400).json({ "message": `ID parametr is required.` });
     }
-    const asset = await Asset.findOne({ _id: req.params.id })
-    if (!asset) {
-        return res.status(204).json({ "message": `No asset maches: ${req.params.id}.` });
+    try {
+        const asset = await Asset.findOne({ _id: req.params.id })
+        console.log('asset: ', asset);
+        if (!asset) {
+            // res.status(204).json({ "message": `No asset maches: ${req.params.id}.` })
+            res.sendStatus(204)
+            // return res.json({ "message": `No asset maches: ${req.params.id}.` }).status(204)
+        }
+        res.json(asset);
+        
+    } catch (error) {
+        res.status(400).json(error)
     }
-    res.json(asset);
 }
 
 const updateAsset = async (req, res) => {

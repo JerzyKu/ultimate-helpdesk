@@ -48,17 +48,31 @@ export default function NewEmployee() {
 
   return (
     <>
+        <h2>Create New Employee</h2>
+
       {errMsg !== "" && <Alert variant={'danger'}><FontAwesomeIcon icon={faCircleExclamation} /> {errMsg}</Alert>}
       {success && <Alert variant={'success'}><FontAwesomeIcon icon={faCircleExclamation} /> załorzone </Alert>}
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3">
           <Form.Label>Firstname</Form.Label>
-          <Form.Control type="text" placeholder="Enter firstname" value={firstname} onChange={e => setFirstname(e.target.value)} required/>
+          <Form.Control
+            type="text"
+            placeholder="Enter firstname"
+            value={firstname}
+            onChange={e => setFirstname(e.target.value)}
+            required
+          />
         </Form.Group>
 
         <Form.Group className="mb-3">
           <Form.Label>Secondname</Form.Label>
-          <Form.Control type="text" placeholder="Enter secondname" value={lastname} onChange={e => setLastname(e.target.value)} required/>
+          <Form.Control
+            type="text"
+            placeholder="Enter secondname"
+            value={lastname}
+            onChange={e => setLastname(e.target.value)}
+            required
+          />
         </Form.Group>
 
         <Button variant="primary" type="submit">

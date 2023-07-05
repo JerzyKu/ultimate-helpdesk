@@ -39,6 +39,11 @@ export default function Employees() {
     }
   }, [])
 
+  const hearderStyles = {
+    color: 'white', 
+    backgroundColor: 'rgb(100, 103, 112)'
+  }
+
 
   return (
     <>
@@ -48,11 +53,11 @@ export default function Employees() {
 
       {users?.length ?
         <Table hover striped >
-          <thead>
+          <thead >
             <tr>
-              <th>#</th>
-              <th>First Name</th>
-              <th>Last Name</th>
+              <th style={hearderStyles}>#</th>
+              <th style={hearderStyles}>First Name</th>
+              <th style={hearderStyles}>Last Name</th>
               {/* <th>Actioins</th> */}
             </tr>
           </thead>
