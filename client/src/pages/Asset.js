@@ -8,18 +8,19 @@ import Alert from 'react-bootstrap/Alert';
 export default function Asset() {
   const [asset, setAsset] = useState("");
   const [errorMessage, setErrorMessage] = useState('')
-  const params = useParams();
+  const {id} = useParams();
 
   useEffect(() => {
     const getAsset = async () => {
       try {
-        const response = await axios.get(`/assets/${params.id}`);
+        const response = await axios.get(`/assets/${id}`);
         setAsset(response.data);
       } catch (error) {
         setErrorMessage([JSON.stringify(error.message)]);
       }
     };
     getAsset();
+    // eslint-disable-next-line
   }, []);
 
   return (
