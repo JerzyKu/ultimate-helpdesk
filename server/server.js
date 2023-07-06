@@ -26,6 +26,7 @@ app.use(cookieParser())
 // routes
 // app.use('/', require('./routes/root'));
 app.use('/register', require('./routes/register'));
+app.use('/users', require('./routes/api/users'));
 // app.use('/auth', require('./routes/auth'));
 // app.use('/refresh', require('./routes/refresh'));
 // app.use('/logout', require('./routes/logout'));
