@@ -4,7 +4,8 @@ const app = express();
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose')
-const connectDB = require('./config/dbConn')
+const connectDB = require('./config/dbConn');
+const { isAdminExist } = require('./isAdminExist');
 const PORT = process.env.PORT || 3500;
 
 // Connect yo MongoDB
@@ -47,4 +48,6 @@ app.all('*', (req, res) => {
 mongoose.connection.once('open', () => {
     console.log('Connected to mongo db')
     app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+    isAdminExist()
 })
+
