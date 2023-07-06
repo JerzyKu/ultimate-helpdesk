@@ -1,7 +1,7 @@
 {
     "client": "Thunder Client",
     "collectionName": "UltimateHD",
-    "dateExported": "2023-06-30T17:42:25.793Z",
+    "dateExported": "2023-07-06T09:02:36.404Z",
     "version": "1.1",
     "folders": [
         {
@@ -17,6 +17,13 @@
             "containerId": "",
             "created": "2023-06-30T17:41:46.023Z",
             "sortNum": 20000
+        },
+        {
+            "_id": "a2ec5600-19be-4289-a2bb-d5e73d8ac811",
+            "name": "users",
+            "containerId": "",
+            "created": "2023-07-05T16:51:29.981Z",
+            "sortNum": 30000
         }
     ],
     "requests": [
@@ -43,7 +50,7 @@
             "method": "GET",
             "sortNum": 7500,
             "created": "2023-06-30T17:41:55.470Z",
-            "modified": "2023-06-30T17:41:55.470Z",
+            "modified": "2023-07-04T20:40:37.798Z",
             "headers": [],
             "params": [],
             "tests": []
@@ -245,6 +252,39 @@
                 "raw": "{\n  \"id\": \"6496ef174d0932240beb1be9\",\n  \"firstname\": \"Anna\",\n  \"lastname\": \"Zelent\"\n}",
                 "form": []
             },
+            "tests": []
+        },
+        {
+            "_id": "6645cc77-aca9-4f3a-b173-ca18cc579f27",
+            "colId": "3fe52783-20c5-4705-868c-9a5c873f9902",
+            "containerId": "a2ec5600-19be-4289-a2bb-d5e73d8ac811",
+            "name": "create user",
+            "url": "http://localhost:3500/register",
+            "method": "POST",
+            "sortNum": 80000,
+            "created": "2023-07-05T16:51:39.096Z",
+            "modified": "2023-07-05T16:56:23.118Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"user\": \"test_user\",\n  \"pwd\": \"zaq1@WSX\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "7483b5c6-c0b0-4b6c-8881-41413333197f",
+            "colId": "3fe52783-20c5-4705-868c-9a5c873f9902",
+            "containerId": "a2ec5600-19be-4289-a2bb-d5e73d8ac811",
+            "name": "show all usres",
+            "url": "http://localhost:3500/users",
+            "method": "GET",
+            "sortNum": 90000,
+            "created": "2023-07-06T08:47:50.883Z",
+            "modified": "2023-07-06T08:48:04.378Z",
+            "headers": [],
+            "params": [],
             "tests": []
         }
     ]
