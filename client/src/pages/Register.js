@@ -9,7 +9,7 @@ import Alert from "react-bootstrap/Alert";
 export default function Register() {
   const usernameRef = useRef();
   const [user, setUser] = useState("");
-  const [pwd, setPwd] = useState("");
+  const [pwd, setPwd] = useState("zaq1@WSX");
   const [errMsg, setErrMsg] = useState('')
 
   useEffect(() => {
@@ -17,9 +17,7 @@ export default function Register() {
   }, []);
 
   useEffect(() => {
-    // usernameRef.current.focus();
     setErrMsg('')
-    // setPwd('')
   }, [user,pwd]);
 
   const handleSubmit = async (e) => {
@@ -27,6 +25,8 @@ export default function Register() {
     try {
         const response = await axios.post('/register', {user, pwd})
         console.log(response);
+        setUser('')
+        setPwd('')
     } catch (error) {
         console.log(error);
         setErrMsg(JSON.stringify(error.message))
