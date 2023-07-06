@@ -44,6 +44,11 @@ export default function NavbarComponent() {
               <NavDropdown title={`${<FontAwesomeIcon icon={faCircleUser} />} Username`} id="basic-nav-dropdown">
                 <NavDropdown.Item as={Link} to={`/account`}>Account</NavDropdown.Item>
                 <NavDropdown.Divider /> {/* ------- */}
+                <NavDropdown.Item as={Link} to={`/register`}>Create new account</NavDropdown.Item>
+                <NavDropdown.Item as={Link} to={`/users`}>lost of users</NavDropdown.Item>
+                
+
+                <NavDropdown.Divider /> {/* ------- */}
                 <NavDropdown.Item as={Link} to={`/login`}>
                   LogOut
                 </NavDropdown.Item>
