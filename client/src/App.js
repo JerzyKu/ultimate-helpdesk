@@ -9,6 +9,8 @@ import Longue from './pages/Longue';
 import Account from './pages/Account';
 import NewAsset from './pages/NewAsset';
 import Asset from './pages/Asset';
+import Register from './pages/Register';
+import Users from './pages/Users';
 
 
 function App() {
@@ -23,6 +25,8 @@ function App() {
         <Route path='/assets/:id' element={<Asset />} />
         <Route path='/longue' element={<Longue />} />
         <Route path='/account' element={<Account />} />
+        <Route path='/register' element={<Register />} />
+        <Route path='/users' element={<Users />} />
         <Route path='/' element={<Home />} />
       </Route>
     </Routes>
