@@ -52,7 +52,7 @@ export default function Assets() {
     <tbody>
       {assets.map(asset => {
         return (
-          <tr>
+          <tr key={asset.name}>
             <td>{asset.name}</td>
             <td>{asset.invSymbol}</td>
           </tr>
