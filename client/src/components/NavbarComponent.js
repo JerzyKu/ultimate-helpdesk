@@ -9,10 +9,10 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 
 //font awsome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleUser, faFrog } from "@fortawesome/free-solid-svg-icons";
+import { faFrog } from "@fortawesome/free-solid-svg-icons";
 
 export default function NavbarComponent() {
-  console.log(window.location.pathname);
+  // console.log(window.location.pathname);
   return (
     <>
       <Navbar
@@ -38,17 +38,15 @@ export default function NavbarComponent() {
               </CustomLink>
               <CustomLink to="/employees">Employees</CustomLink>
               <CustomLink to="/longue">Longue</CustomLink>
-              <CustomLink to="/account">
+              {/* <CustomLink to="/account">
                 <FontAwesomeIcon icon={faCircleUser} /> Username
-              </CustomLink>
-              <NavDropdown title={`${<FontAwesomeIcon icon={faCircleUser} />} Username`} id="basic-nav-dropdown">
+              </CustomLink> */}
+              <NavDropdown title={`{{Username}}`} id="basic-nav-dropdown">
                 <NavDropdown.Item as={Link} to={`/account`}>Account</NavDropdown.Item>
-                <NavDropdown.Divider /> {/* ------- */}
+                <NavDropdown.Divider /> {/* --------------------------------------------------------------- */}
                 <NavDropdown.Item as={Link} to={`/register`}>Create new account</NavDropdown.Item>
                 <NavDropdown.Item as={Link} to={`/users`}>lost of users</NavDropdown.Item>
-                
-
-                <NavDropdown.Divider /> {/* ------- */}
+                <NavDropdown.Divider /> {/* --------------------------------------------------------------- */}
                 <NavDropdown.Item as={Link} to={`/login`}>
                   LogOut
                 </NavDropdown.Item>
