@@ -50,7 +50,7 @@ export default function Users() {
     <tbody>
       {users.map(user => {
         return (
-          <tr>
+          <tr key={user.username}>
             <td>{user.username}</td>
             <td>{user.invSymbol}</td>
           </tr>
