@@ -1,16 +1,15 @@
 import { Routes, Route } from 'react-router-dom';
-import Emplyees from './pages/Employees'
-import Assets from './pages/Assets'
+import Emplyees from './features/employees/Employees'
 import Layout from './Layout';
-import Home from './pages/Home';
+import Home from './features/auth/Home';
 import LogInPage from './pages/LogInPage';
-import NewEmployee from './pages/NewEmployee';
-import Longue from './pages/Longue';
+import NewEmployee from './features/employees/NewEmployee';
 import Account from './pages/Account';
-import NewAsset from './pages/NewAsset';
-import Asset from './pages/Asset';
+import NewAsset from './features/assets/NewAsset';
+import Asset from './features/assets/Asset';
 import Register from './pages/Register';
-import Users from './pages/Users';
+import AssetsList from './features/assets/AssetsList';
+import UsersList from './pages/UsersList';
 
 
 function App() {
@@ -18,16 +17,25 @@ function App() {
     <Routes>
       <Route path='/login' element={<LogInPage />} />
       <Route path='/' element={<Layout />}>
-        <Route path='/employees' element={<Emplyees />} />
-        <Route path='/employees/new' element={<NewEmployee />} />
-        <Route path='/assets' element={<Assets />} />
-        <Route path='/assets/new' element={<NewAsset />} />
-        <Route path='/assets/:id' element={<Asset />} />
-        <Route path='/longue' element={<Longue />} />
-        <Route path='/account' element={<Account />} />
-        <Route path='/register' element={<Register />} />
-        <Route path='/users' element={<Users />} />
-        <Route path='/' element={<Home />} />
+        <Route index element={<Home />} />
+
+        <Route path='employees' >
+          <Route index element={<Emplyees />} />
+          <Route path='new' element={<NewEmployee />} />
+        </Route>
+
+        <Route path='assets' >
+          <Route index element={<AssetsList />} />
+          <Route path='new' element={<NewAsset />} />
+          <Route path=':id' element={<Asset />} />
+        </Route>
+
+        <Route path='users' >
+          <Route index element={<UsersList />} />
+        </Route>
+
+        <Route path='account' element={<Account />} />
+        <Route path='register' element={<Register />} />
       </Route>
     </Routes>
   );

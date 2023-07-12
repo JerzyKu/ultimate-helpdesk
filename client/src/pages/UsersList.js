@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
 import axios from '../api/axios'
 
 // reat-bootstrap
@@ -11,27 +10,28 @@ import Alert from 'react-bootstrap/Alert';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus, faTriangleExclamation } from '@fortawesome/free-solid-svg-icons'
 
-export default function Assets() {
 
-  const [assets, setAssets] = useState([])
+export default function UsersList() {
+
+  const [users, setUsers] = useState([])
 
   useEffect(() => {
     let isMounted = true
     const controller = new AbortController()
 
-    const getAssets = async () => {
+    const getUsers = async () => {
       try {
-        const response = await axios.get('/assets', {
+        const response = await axios.get('/users', {
           signal: controller.signal
         })
-        isMounted && setAssets(response.data)
+        isMounted && setUsers(response.data)
         console.log(response);
       } catch (error) {
         console.log(error);
       }
     }
 
-    getAssets()
+    getUsers()
 
     return () => {
       isMounted = false
@@ -40,39 +40,31 @@ export default function Assets() {
 
   }, [])
 
-
-
   const table = <Table hover striped>
     <thead>
       <tr>
-        <th className='hearderStyles'>Name</th>
+        <th className='hearderStyles'>Username</th>
         <th style={{}}>Inventory Number</th>
       </tr>
     </thead>
     <tbody>
-      {assets.map(asset => {
+      {users.map(user => {
         return (
-          <tr key={asset.name}>
-            <td>{asset.name}</td>
-            <td>{asset.invSymbol}</td>
+          <tr key={user.username}>
+            <td>{user.username}</td>
+            <td>{user.invSymbol}</td>
           </tr>
         )
       })}
     </tbody>
   </Table>
 
-
   return (
     <>
-      <Button type='succes' className='m-2' as={Link} to="/assets/new"><FontAwesomeIcon icon={faPlus} /> New Asset </Button>
-
-      <hr />
-
-      {assets?.length
+      {users?.length
         ? table
         : <Alert variant={'warning'}><FontAwesomeIcon icon={faTriangleExclamation} /> No users to display</Alert>
       }
-
     </>
   )
 }

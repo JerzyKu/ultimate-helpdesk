@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
-import axios from '../api/axios';
+import axios from '../../api/axios';
 
 // bootstrap
 import Table from 'react-bootstrap/Table';

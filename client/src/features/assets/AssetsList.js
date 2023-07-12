@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import axios from '../api/axios'
+import { Link } from 'react-router-dom'
+import axios from '../../api/axios'
 
 // reat-bootstrap
 import Table from 'react-bootstrap/Table'
@@ -10,28 +11,27 @@ import Alert from 'react-bootstrap/Alert';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus, faTriangleExclamation } from '@fortawesome/free-solid-svg-icons'
 
+export default function AssetsList() {
 
-export default function Users() {
-
-  const [users, setUsers] = useState([])
+  const [assets, setAssets] = useState([])
 
   useEffect(() => {
     let isMounted = true
     const controller = new AbortController()
 
-    const getUsers = async () => {
+    const getAssets = async () => {
       try {
-        const response = await axios.get('/users', {
+        const response = await axios.get('/assets', {
           signal: controller.signal
         })
-        isMounted && setUsers(response.data)
+        isMounted && setAssets(response.data)
         console.log(response);
       } catch (error) {
         console.log(error);
       }
     }
 
-    getUsers()
+    getAssets()
 
     return () => {
       isMounted = false
@@ -40,31 +40,39 @@ export default function Users() {
 
   }, [])
 
+
+
   const table = <Table hover striped>
     <thead>
       <tr>
-        <th className='hearderStyles'>Username</th>
+        <th className='hearderStyles'>Name</th>
         <th style={{}}>Inventory Number</th>
       </tr>
     </thead>
     <tbody>
-      {users.map(user => {
+      {assets.map(asset => {
         return (
-          <tr key={user.username}>
-            <td>{user.username}</td>
-            <td>{user.invSymbol}</td>
+          <tr key={asset.name}>
+            <td>{asset.name}</td>
+            <td>{asset.invSymbol}</td>
           </tr>
         )
       })}
     </tbody>
   </Table>
 
+
   return (
     <>
-      {users?.length
+      <Button type='succes' className='m-2' as={Link} to="/assets/new"><FontAwesomeIcon icon={faPlus} /> New Asset </Button>
+
+      <hr />
+
+      {assets?.length
         ? table
         : <Alert variant={'warning'}><FontAwesomeIcon icon={faTriangleExclamation} /> No users to display</Alert>
       }
+
     </>
   )
 }
