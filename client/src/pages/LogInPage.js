@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import Form from 'react-bootstrap/Form';
@@ -12,6 +12,7 @@ import { faCircleExclamation, faFrog } from '@fortawesome/free-solid-svg-icons'
 export default function LogInPage() {
 
     const loginRef = useRef()
+    const [errorMsg, setErrorMsg] = useState('')
 
     useEffect( () => {
         loginRef.current.focus()
@@ -22,8 +23,7 @@ export default function LogInPage() {
             <h1>
                 <FontAwesomeIcon icon={faFrog} bounce style={{ color: "#0b3805", }} /> Ultimate HD
             </h1>
-            <Alert variant={'danger'} className='d-nsne' style={{ visibility: 'hiddsen' }}><FontAwesomeIcon icon={faCircleExclamation} />This is jfghjfghjfghjfghjfghjgfhjfghjfghjfghja danger
-                alert—check it out!</Alert>
+            {errorMsg && <Alert variant={'danger'} className='d-nsne' style={{ visibility: 'hiddsen' }}><FontAwesomeIcon icon={faCircleExclamation} /> {errorMsg}</Alert>}
             <Form>
                 <Form.Group className="mb-3" controlId="formGroupEmail">
                     <Form.Label>Email address</Form.Label>
