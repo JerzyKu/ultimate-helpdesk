@@ -17,7 +17,7 @@ export default function NavbarComponent() {
     <>
       <Navbar
         expand="lg"
-        className="mb-3"
+        className="m-2 rounded-1"
         style={{ backgroundColor: "#006A4E", color: "white" }}
       >
         <Container>
