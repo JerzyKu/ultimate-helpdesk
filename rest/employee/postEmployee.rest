@@ -1,7 +1,0 @@
-POST  http://localhost:3500/employees
-content-type: application/json
-
-{
-    "firstname": "Anna",
-    "lastname": "Kowalska"
-}
