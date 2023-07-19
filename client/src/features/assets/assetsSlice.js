@@ -1,4 +1,5 @@
-import { createSlice, nanoid } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, nanoid } from "@reduxjs/toolkit";
+import axios from "../../api/axios";
 
 const initialState = {
   assets: [],
@@ -6,6 +7,10 @@ const initialState = {
   error: null
 }
 
+export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
+  const response = await axios.get(`/assets`)
+  return response.data
+})
 
 const assetsSlice = createSlice({
   name: "assets",
@@ -13,8 +18,7 @@ const assetsSlice = createSlice({
   reducers: {
     assetAdded: {
       reducer(state, action) {
-        // console.log("action: ", action);
-        state.push(action.payload);
+        state.assets.push(action.payload);
       },
       prepare(name, invSymbol, ownerID) {
         return {
@@ -28,10 +32,30 @@ const assetsSlice = createSlice({
       },
     },
   },
+  extraReducers(builder) {
+    builder
+      .addCase(fetchPosts.pending, (state, action) => {
+        state.status = 'loading'
+      })
+      .addCase(fetchPosts.fulfilled, (state, action) => {
+        state.status = 'succeeded'
+        state.assets = action.payload 
+        console.log(action.payload );
+      })
+      .addCase(fetchPosts.rejected, (state, action) => {
+        state.status = 'failed'
+        state.error = action.error.message
+
+      })
+      // .addCase()
+  }
 });
 
 export const selectAllAssets = (state) => state.assets.assets;
+export const getAssetsStatus = (state) => state.assets.status;
+export const getAssetsError = (state) => state.assets.error;
 
-export const { assetAdded } = assetsSlice.actions;
+export const { assetAdded } = assetsSlice.actions; 
 
 export default assetsSlice.reducer;
+

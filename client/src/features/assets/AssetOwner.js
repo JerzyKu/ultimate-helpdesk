@@ -5,5 +5,5 @@ export default function AssetOwner({userID}) {
   const users = useSelector(selectAllUsers);
   const owner = users.find((user) => user.id === userID);
   console.log('owner', owner);
-  return <>{owner ? owner.name : "ready to issue"};</>;
+  return <>{owner ? `Issued to ${owner.username}` : "ready to issue"}</>;
 }
