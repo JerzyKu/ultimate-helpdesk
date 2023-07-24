@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
-import { fetchPosts, getAssetsError, getAssetsStatus, selectAllAssets } from "./assetsSlice";
+import { fetchAssets, getAssetsError, getAssetsStatus, selectAllAssets } from "./assetsSlice";
 
 // reat-bootstrap
 import Table from "react-bootstrap/Table";
@@ -20,7 +20,7 @@ export default function AssetsList() {
 
   useEffect(() => {
     if (assetsStatus === 'idle') {
-      dispach(fetchPosts())
+      dispach(fetchAssets())
     }
   }, [assetsStatus, dispach])
 

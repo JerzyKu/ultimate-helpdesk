@@ -9,9 +9,9 @@ const assetSchema = new Schema({
     invSymbol: {
         type: String,
         require: true,
-        unique: true
+        // unique: true
     },
-    owner: {
+    ownerID: {
         type: mongoose.SchemaTypes.ObjectId,
         ref: "Employee"
     }

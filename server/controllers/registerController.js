@@ -16,7 +16,7 @@ const handleNewUser = async (req, res) => {
             "username": user, 
             "password": hashedPwd
         })
-        console.log("🚀 ~ file: registerController.js:19 ~ handleNewUser ~ resunt:", resunt)
+        // console.log("🚀 ~ file: registerController.js:19 ~ handleNewUser ~ resunt:", resunt)
         res.status(201).json({ 'success': `New user ${user} created!` })
     } catch (err) {
         return res.status(500).json({ 'message': err.message }) //500: srv err. 

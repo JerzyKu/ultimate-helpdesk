@@ -1,13 +1,14 @@
 const Asset = require('../model/Asset')
 
 const createNewAsset = async (req, res) => {
-    if (!req?.body?.name || !req?.body?.invSymbol) {
+    if (!req?.body?.name || !req?.body?.invSymbol || !req?.body?.userID) {
         return res.status(400).json({ 'message': 'Name and inventory symbol are required.' });
     }
     try {
         const result = await Asset.create({
             name: req.body.name,
-            invSymbol: req.body.invSymbol
+            invSymbol: req.body.invSymbol,
+            ownerID: req.body.userID
         })
         res.status(201).json(result)
     } catch (error) {

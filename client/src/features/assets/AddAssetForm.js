@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { assetAdded } from "./assetsSlice";
+import { addNewAsset } from "./assetsSlice";
 import { selectAllUsers } from "../users/usersSlice";
+
+import Button from "react-bootstrap/Button";
 
 export default function AddAssetForm() {
   const dispatch = useDispatch();
@@ -10,6 +12,7 @@ export default function AddAssetForm() {
   const [name, setName] = useState("");
   const [invSymbol, setInvSymbol] = useState("");
   const [userID, setUserID] = useState("");
+  const [addRequestStatus, setAddRequestStatus] = useState("idle");
 
   const users = useSelector(selectAllUsers);
 
@@ -17,26 +20,34 @@ export default function AddAssetForm() {
   const onInvSymbolChange = (e) => setInvSymbol(e.target.value);
   const onOwnerChange = (e) => setUserID(e.target.value);
 
+  const canSave =
+    [name, invSymbol /*userID*/].every(Boolean) && addRequestStatus === "idle";
+
   const onSavePostClicked = () => {
-    if (name && invSymbol) {
-      dispatch(assetAdded(name, invSymbol, userID));
+    if (canSave) {
+      try {
+        setAddRequestStatus("pending");
+        dispatch(addNewAsset({ name, invSymbol, userID })).unwrap();
+      } catch (error) {
+        console.error(`Failed to save asset: ${error}`);
+      } finally {
+        setAddRequestStatus("idle");
+      }
 
       setInvSymbol("");
       setName("");
+      setUserID("");
     }
   };
 
-  const canSave = Boolean(name) && Boolean(invSymbol) && Boolean(userID);
-
   const usersOptions = users.map((user) => (
-    <option key={user.id} value={user.id}>
+    <option key={user._id} value={user._id}>
       {user.username}
     </option>
   ));
 
   return (
     <section>
-      {/* {JSON.stringify(users)} */}
       <h2>Add new Asset</h2>
       <form>
         <label htmlFor="name">Name: </label>
@@ -62,9 +73,9 @@ export default function AddAssetForm() {
           {usersOptions}
         </select>
 
-        <button type="button" onClick={onSavePostClicked} disabled={!canSave}>
+        <Button type="button" onClick={onSavePostClicked} disabled={!canSave}>
           Save Post
-        </button>
+        </Button>
       </form>
     </section>
   );
