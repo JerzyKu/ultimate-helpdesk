@@ -3,7 +3,7 @@ import axios from "../../api/axios";
 
 const initialState = {
   assets: [],
-  status: 'idle', // idle | loading \ succeded | failed
+  status: 'idle', // 'idle' | 'loading' | 'succeded' | 'failed'
   error: null
 }
 
