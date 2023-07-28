@@ -23,17 +23,16 @@ const assetsSlice = createSlice({
   reducers: {
     assetAdded: {
       reducer(state, action) {
-        state.assets.push(action.payload);
+        state.assets.push(action.payload)
       },
       prepare(name, invSymbol, ownerID) {
         return {
           payload: {
-            id: nanoid(),
             name,
             invSymbol,
             ownerID,
           },
-        };
+        }
       },
     },
   },
@@ -45,7 +44,6 @@ const assetsSlice = createSlice({
       .addCase(fetchAssets.fulfilled, (state, action) => {
         state.status = 'succeeded'
         state.assets = action.payload 
-        console.log(action.payload );
       })
       .addCase(fetchAssets.rejected, (state, action) => {
         state.status = 'failed'
@@ -55,16 +53,15 @@ const assetsSlice = createSlice({
         state.assets.push(action.payload)
       })
       .addCase(addNewAsset.rejected, (state, action) => {
-        console.log(action.error.message);
+        console.log(action.error.message)
       })
   }
-});
+})
 
-export const selectAllAssets = (state) => state.assets.assets;
-export const getAssetsStatus = (state) => state.assets.status;
-export const getAssetsError = (state) => state.assets.error;
+export const selectAllAssets = (state) => state.assets.assets
+export const getAssetsStatus = (state) => state.assets.status
+export const getAssetsError = (state) => state.assets.error
 
-export const { assetAdded } = assetsSlice.actions; 
+export const { assetAdded } = assetsSlice.actions
 
-export default assetsSlice.reducer;
-
+export default assetsSlice.reducer
