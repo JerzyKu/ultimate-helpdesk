@@ -12,7 +12,7 @@ export const fetchAssets = createAsyncThunk('assets/fetchAssets', async () => {
   return response.data
 })
 
-export const addNewAsset = createAsyncThunk('assets/assNewAsset', async (initialAsset) => {
+export const addNewAsset = createAsyncThunk('assets/addNewAsset', async (initialAsset) => {
   const response = await axios.post('/assets', initialAsset)
   return response.data
 })
@@ -43,7 +43,7 @@ const assetsSlice = createSlice({
       })
       .addCase(fetchAssets.fulfilled, (state, action) => {
         state.status = 'succeeded'
-        state.assets = action.payload 
+        state.assets = action.payload
       })
       .addCase(fetchAssets.rejected, (state, action) => {
         state.status = 'failed'
@@ -61,6 +61,11 @@ const assetsSlice = createSlice({
 export const selectAllAssets = (state) => state.assets.assets
 export const getAssetsStatus = (state) => state.assets.status
 export const getAssetsError = (state) => state.assets.error
+
+export const selectAssetByID = (state, assetID) => {
+  console.log(state);
+  return state.assets.assets.find(asset => asset._id === assetID)
+}
 
 export const { assetAdded } = assetsSlice.actions
 

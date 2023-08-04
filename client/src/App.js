@@ -6,10 +6,10 @@ import LogInPage from './pages/LogInPage';
 import NewEmployee from './features/employees/NewEmployee';
 import Account from './pages/Account';
 import NewAsset from './features/assets/NewAsset';
-import Asset from './features/assets/Asset';
 import Register from './pages/Register';
 import AssetsList from './features/assets/AssetsList';
 import UsersList from './pages/UsersList';
+import SingleAssetPage from './features/assets/SingleAssetPage';
 
 
 function App() {
@@ -27,7 +27,7 @@ function App() {
         <Route path='assets' >
           <Route index element={<AssetsList />} />
           <Route path='new' element={<NewAsset />} />
-          <Route path=':id' element={<Asset />} />
+          <Route path=':id' element={<SingleAssetPage />} />
         </Route>
 
         <Route path='users' >

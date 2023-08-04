@@ -5,6 +5,7 @@ import { addNewAsset } from "./assetsSlice";
 import { selectAllUsers } from "../users/usersSlice";
 
 import Button from "react-bootstrap/Button";
+// import Spinner from "react-bootstrap/Spinner";
 
 export default function AddAssetForm() {
   const dispatch = useDispatch();
@@ -21,22 +22,25 @@ export default function AddAssetForm() {
   const onOwnerChange = (e) => setUserID(e.target.value);
 
   const canSave =
-    [name, invSymbol /*userID*/].every(Boolean) && addRequestStatus === "idle";
+    [name, invSymbol].every(Boolean) && addRequestStatus === "idle";
 
   const onSavePostClicked = () => {
     if (canSave) {
       try {
         setAddRequestStatus("pending");
-        dispatch(addNewAsset({ name, invSymbol, userID })).unwrap();
+        dispatch(addNewAsset({ name, invSymbol, userID })).unwrap(); // return promisse: action.payload or throw error
+
+
       } catch (error) {
         console.error(`Failed to save asset: ${error}`);
       } finally {
         setAddRequestStatus("idle");
+        setInvSymbol("");
+        setName("");
+        setUserID("");
       }
 
-      setInvSymbol("");
-      setName("");
-      setUserID("");
+
     }
   };
 
@@ -74,7 +78,8 @@ export default function AddAssetForm() {
         </select>
 
         <Button type="button" onClick={onSavePostClicked} disabled={!canSave}>
-          Save Post
+          {/* <Spinner animation="grow" size='sm'/>  */}
+          Add Asset
         </Button>
       </form>
     </section>

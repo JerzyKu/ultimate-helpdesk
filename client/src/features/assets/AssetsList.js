@@ -24,14 +24,26 @@ export default function AssetsList() {
   }, [assetsStatus, dispach])
 
 
+  const table = <Table hover striped>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th className="hearderStyles">Name</th>
+        <th style={{}}>Inventory Number</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>{assets.map((asset) => {
+      return <AssetRow key={asset._id} asset={asset} />
+    })}</tbody>
+  </Table>
+
 
   let content
-  if (assetsStatus === 'idle') {
-    content = <Spinner animation="border" variant="success" />
+  if (assetsStatus === 'loading') {
+    content = <Spinner animation="grow" />
   } else if (assetsStatus === 'succeeded') {
-    content = assets.map((asset) => {
-      return <AssetRow key={asset._id} asset={asset} />
-    });
+    content = table
   } else if (assetsStatus === 'failed') {
     content = <Alert variant={'danger'}> {assetsError} </Alert>
   }
@@ -40,20 +52,8 @@ export default function AssetsList() {
   return (
     <>
       <AddAssetForm />
-
       <br /><hr /><br />
-
-      <Table hover striped>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th className="hearderStyles">Name</th>
-            <th style={{}}>Inventory Number</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>{content}</tbody>
-      </Table>
+      {content}
     </>
   );
 }

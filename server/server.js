@@ -23,6 +23,12 @@ app.use(express.json());
 //middleware for cookies
 app.use(cookieParser())
 
+10
+
+// simulate delay response
+app.use((req, res, next) => {
+    setTimeout(() => next(), 2000);
+});
 
 // routes
 // app.use('/', require('./routes/root'));
