@@ -2,22 +2,24 @@ import React from 'react'
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { selectAssetByID } from './assetsSlice';
+import AssetOwner from './AssetOwner';
 
 export default function SingleAssetPage() {
-
     let { id } = useParams();
+    const assetData = useSelector(state => selectAssetByID(state, id))
 
-    const asset = useSelector(state => selectAssetByID(state, id))
-    console.log(asset);
-
-    if (!asset) {
-        return (
-            <p>post not found {id}</p>
-        )
-    }
+    const asset = < div>
+        {/* {JSON.stringify(assetData)} <br /> */}
+        Name: {assetData.name} <br />
+        Inventory symbol: {assetData.invSymbol}<br />
+        createdAt: {assetData.createdAt}<br />
+        last update: {assetData.updatedAt}<br />
+        Owner: <AssetOwner userID={assetData.ownerID} />
+    </div>
 
     return (
-        // <p>post found</p>
-        <div>{ asset ? JSON.stringify(asset) : "no asset with that id"}</div>
+        <>
+            {asset ? asset : "no asset with that id"}
+        </>
     )
 }
