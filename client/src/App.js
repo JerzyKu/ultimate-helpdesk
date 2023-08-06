@@ -11,6 +11,7 @@ import AssetsList from './features/assets/AssetsList';
 import UsersList from './pages/UsersList';
 import SingleAssetPage from './features/assets/SingleAssetPage';
 import EditAssetForm from './features/assets/EditAssetForm';
+import NotFound from './components/NotFound';
 
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
         <Route path='account' element={<Account />} />
         <Route path='register' element={<Register />} />
       </Route>
+      <Route path='*'  element={<NotFound />}/>
     </Routes>
   );
 }
