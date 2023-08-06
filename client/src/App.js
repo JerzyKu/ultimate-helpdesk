@@ -10,6 +10,7 @@ import Register from './pages/Register';
 import AssetsList from './features/assets/AssetsList';
 import UsersList from './pages/UsersList';
 import SingleAssetPage from './features/assets/SingleAssetPage';
+import EditAssetForm from './features/assets/EditAssetForm';
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
         <Route path='assets' >
           <Route index element={<AssetsList />} />
           <Route path='new' element={<NewAsset />} />
+          <Route path='edit/:id' element={<EditAssetForm />} />
           <Route path=':id' element={<SingleAssetPage />} />
         </Route>
 
