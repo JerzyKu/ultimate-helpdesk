@@ -17,6 +17,15 @@ export const addNewAsset = createAsyncThunk('assets/addNewAsset', async (initial
   return response.data
 })
 
+export const updateAsset = createAsyncThunk('asset/updateAsset', async (initialAsset) => {
+  try {
+    const response = await axios.put(`/assets/`, initialAsset)
+    return response.data
+  } catch (err) {
+    return err.message
+  }
+})
+
 const assetsSlice = createSlice({
   name: "assets",
   initialState,
@@ -55,6 +64,16 @@ const assetsSlice = createSlice({
       .addCase(addNewAsset.rejected, (state, action) => {
         console.log(action.error.message)
       })
+      .addCase(updateAsset.fulfilled, (state, action) => {
+        if (!action.payload?._id) {
+          console.log('Update could not complete');
+          console.log(action.payload);
+          return
+        }
+        const { _id } = action.payload
+        const assets = state.assets.filter(asset => asset._id !== _id)
+        state.assets = [...assets, action.payload]
+      })
   }
 })
 
@@ -63,7 +82,7 @@ export const getAssetsStatus = (state) => state.assets.status
 export const getAssetsError = (state) => state.assets.error
 
 export const selectAssetByID = (state, assetID) => {
-  console.log(state);
+  // console.log(state);
   return state.assets.assets.find(asset => asset._id === assetID)
 }
 
