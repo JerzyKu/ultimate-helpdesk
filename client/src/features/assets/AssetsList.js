@@ -7,8 +7,9 @@ import Table from "react-bootstrap/Table";
 import Spinner from 'react-bootstrap/Spinner';
 import Alert from 'react-bootstrap/Alert';
 
-import AddAssetForm from "./AddAssetForm";
 import AssetRow from "./AssetRow";
+import { Link } from "react-router-dom";
+import Button from "react-bootstrap/Button";
 
 export default function AssetsList() {
   const dispach = useDispatch()
@@ -51,8 +52,8 @@ export default function AssetsList() {
 
   return (
     <>
-      <AddAssetForm />
-      <br /><hr /><br />
+      <Button as={Link} to={'new'} >Add New Asset</Button>
+      <hr />
       {content}
     </>
   );
