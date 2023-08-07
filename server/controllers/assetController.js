@@ -43,6 +43,7 @@ const getAsset = async (req, res) => {
 }
 
 const updateAsset = async (req, res) => {
+    // console.log(req.body);
     if (!req?.body?.id) {
         return res.status(400).json({ "message": `ID parametr is required.` });
     }
@@ -52,6 +53,7 @@ const updateAsset = async (req, res) => {
     }
     if (req.body?.name) asset.name = req.body.name;
     if (req.body?.invSymbol) asset.invSymbol = req.body.invSymbol;
+    if (req.body?.ownerID) asset.ownerID = req.body.ownerID;
     const result = await asset.save()
     res.json(result);
 }
