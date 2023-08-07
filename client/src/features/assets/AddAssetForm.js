@@ -5,6 +5,8 @@ import { addNewAsset } from "./assetsSlice";
 import { selectAllUsers } from "../users/usersSlice";
 
 import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+
 // import Spinner from "react-bootstrap/Spinner";
 
 export default function AddAssetForm() {
@@ -39,8 +41,6 @@ export default function AddAssetForm() {
         setName("");
         setUserID("");
       }
-
-
     }
   };
 
@@ -53,35 +53,49 @@ export default function AddAssetForm() {
   return (
     <section>
       <h2>Add new Asset</h2>
-      <form>
-        <label htmlFor="name">Name: </label>
-        <input
-          type="text"
-          name="name"
-          id="name"
-          value={name}
-          onChange={onNameChange}
-        />
-        <label htmlFor="invSymbol">invSymbol:</label>
-        <input
-          type="text"
-          name="invSymbol"
-          id="invSymbol"
-          value={invSymbol}
-          onChange={onInvSymbolChange}
-        />
+      <Form>
+        <Form.Group>
+          <Form.Label htmlFor="name">Name: </Form.Label>
+          <Form.Control
+            type="text"
+            name="name"
+            id="name"
+            placeholder="Enter name"
+            value={name}
+            onChange={onNameChange}
+            required
+            isInvalid
 
-        <label htmlFor="owner">Owner: </label>
-        <select id="owner" value={userID} onChange={onOwnerChange}>
-          <option value=""></option>
-          {usersOptions}
-        </select>
+          />
+        </Form.Group>
+
+        <Form.Group>
+          <Form.Label htmlFor="invSymbol">invSymbol:</Form.Label>
+          <Form.Control
+            type="text"
+            name="invSymbol"
+            id="invSymbol"
+            placeholder="Enter inventory number"
+            value={invSymbol}
+            onChange={onInvSymbolChange}
+            required
+            isValid
+          />
+        </Form.Group>
+
+        <Form.Group>
+          <Form.Label htmlFor="owner">Owner: </Form.Label>
+          <Form.Select id="owner" value={userID} onChange={onOwnerChange}>
+            <option value="">-=- select owner -=-</option>
+            {usersOptions}
+          </Form.Select>
+        </Form.Group>
 
         <Button type="button" onClick={onSavePostClicked} disabled={!canSave}>
           {/* <Spinner animation="grow" size='sm'/>  */}
           Add Asset
         </Button>
-      </form>
+      </Form>
     </section>
   );
 }
