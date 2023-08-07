@@ -5,13 +5,13 @@ import Home from './features/auth/Home';
 import LogInPage from './pages/LogInPage';
 import NewEmployee from './features/employees/NewEmployee';
 import Account from './pages/Account';
-import NewAsset from './features/assets/NewAsset';
 import Register from './pages/Register';
 import AssetsList from './features/assets/AssetsList';
 import UsersList from './pages/UsersList';
 import SingleAssetPage from './features/assets/SingleAssetPage';
 import EditAssetForm from './features/assets/EditAssetForm';
 import NotFound from './components/NotFound';
+import AddAssetForm from './features/assets/AddAssetForm';
 
 
 function App() {
@@ -28,7 +28,7 @@ function App() {
 
         <Route path='assets' >
           <Route index element={<AssetsList />} />
-          <Route path='new' element={<NewAsset />} />
+          <Route path='new' element={<AddAssetForm />} />
           <Route path='edit/:id' element={<EditAssetForm />} />
           <Route path=':id' element={<SingleAssetPage />} />
         </Route>
