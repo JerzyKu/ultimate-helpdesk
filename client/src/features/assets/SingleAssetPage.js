@@ -23,12 +23,12 @@ export default function SingleAssetPage() {
     const asset = < div>
         {/* {JSON.stringify(assetData)} <br /> */}
         <Button as={Link} to='/assets'> {'< Assets'}</Button> <br />
-        Name: {assetData.name} <br />
-        Inventory symbol: {assetData.invSymbol}<br />
-        createdAt: {assetData.createdAt}<br />
-        last update: {assetData.updatedAt}<br />
-        Owner: <AssetOwner userID={assetData.ownerID} /> <br />
-        <Link to={`/assets/edit/${assetData._id}`}>Edit</Link>
+        Name: {assetData?.name} <br />
+        Inventory symbol: {assetData?.invSymbol}<br />
+        createdAt: {assetData?.createdAt}<br />
+        last update: {assetData?.updatedAt}<br />
+        Owner: <AssetOwner userID={assetData?.ownerID} /> <br />
+        <Link to={`/assets/edit/${assetData?._id}`}>Edit</Link>
         <Button variant='danger' onClick={onDeleteClick}>delete</Button>
     </div>
 

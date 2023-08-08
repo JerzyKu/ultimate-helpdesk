@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -15,12 +15,18 @@ export default function EditAssetForm() {
     const usersList = useSelector(selectAllUsers)
     const asset = useSelector(state => selectAssetByID(state, id))
 
-    const [assetName, setAssetName] = useState(asset.name)
-    const [assetInvSymbol, setAssetInvSymbol] = useState(asset.invSymbol)
-    const [assetOwner, setAssetOwner] = useState(asset.ownerID)
+    const [assetName, setAssetName] = useState(asset?.name)
+    const [assetInvSymbol, setAssetInvSymbol] = useState(asset?.invSymbol)
+    const [assetOwner, setAssetOwner] = useState(asset?.ownerID)
     const [requsestStatus, setRequestStatus] = useState('idle')
 
     const dispatch = useDispatch()
+
+    useEffect( () => {
+        setAssetName(asset?.name)
+        setAssetInvSymbol(asset?.invSymbol)
+        setAssetOwner(asset?.ownerID)
+    },[asset])
 
 
     const canSave = [assetName, assetInvSymbol, assetOwner].every(Boolean) && requsestStatus === 'idle'

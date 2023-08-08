@@ -1,6 +1,5 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchAssets, getAssetsError, getAssetsStatus, selectAllAssets } from "./assetsSlice";
+import { useSelector } from "react-redux";
+import { getAssetsError, getAssetsStatus, selectAllAssets } from "./assetsSlice";
 
 // reat-bootstrap
 import Table from "react-bootstrap/Table";
@@ -12,18 +11,10 @@ import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 
 export default function AssetsList() {
-  const dispach = useDispatch()
 
   const assets = useSelector(selectAllAssets);
   const assetsStatus = useSelector(getAssetsStatus);
   const assetsError = useSelector(getAssetsError);
-
-  useEffect(() => {
-    if (assetsStatus === 'idle') {
-      dispach(fetchAssets())
-    }
-  }, [assetsStatus, dispach])
-
 
   const table = <Table hover striped>
     <thead>
