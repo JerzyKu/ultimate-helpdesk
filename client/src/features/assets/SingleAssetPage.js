@@ -1,13 +1,24 @@
 import React from 'react'
-import { useSelector } from 'react-redux';
-import { Link, useParams } from 'react-router-dom';
-import { selectAssetByID } from './assetsSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import { deleteAsset, selectAssetByID } from './assetsSlice';
 import AssetOwner from './AssetOwner';
 import Button from 'react-bootstrap/Button';
 
 export default function SingleAssetPage() {
     const  { id } = useParams();
+    const dispach = useDispatch()
+    const navigate = useNavigate()
     const assetData = useSelector(state => selectAssetByID(state, id))
+
+    const onDeleteClick = () => {
+        try {
+            dispach(deleteAsset({"id": assetData._id})).unwrap()
+            navigate('/assets/')
+        } catch (err) {
+            console.log('Filet to delete ', err);
+        }
+    }
 
     const asset = < div>
         {/* {JSON.stringify(assetData)} <br /> */}
@@ -18,6 +29,7 @@ export default function SingleAssetPage() {
         last update: {assetData.updatedAt}<br />
         Owner: <AssetOwner userID={assetData.ownerID} /> <br />
         <Link to={`/assets/edit/${assetData._id}`}>Edit</Link>
+        <Button variant='danger' onClick={onDeleteClick}>delete</Button>
     </div>
 
     return (

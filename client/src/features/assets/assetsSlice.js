@@ -26,6 +26,17 @@ export const updateAsset = createAsyncThunk('asset/updateAsset', async (initialA
   }
 })
 
+export const deleteAsset = createAsyncThunk('asset/deleteAsset', async (initialAsset) => {
+  try {
+    // console.log("delete thunk: ", initialAsset);
+    const response = await axios.delete(`/assets/${initialAsset.id}`)
+    if (response.status === 200) return initialAsset
+    return `${response?.status}: ${response?.statusText}`
+  } catch (error) {
+    return error.message
+  }
+})
+
 const assetsSlice = createSlice({
   name: "assets",
   initialState,
@@ -73,6 +84,16 @@ const assetsSlice = createSlice({
         const { _id } = action.payload
         const assets = state.assets.filter(asset => asset._id !== _id)
         state.assets = [...assets, action.payload]
+      })
+      .addCase(deleteAsset.fulfilled, (state, action) => {
+        if (!action.payload?.id) {
+          console.log('Delete could not complete');
+          console.log(action.payload);
+          return
+        }
+        const { id } = action.payload
+        const assets = state.assets.filter(asset => asset._id !== id)
+        state.assets = assets
       })
   }
 })
