@@ -59,16 +59,17 @@ const updateAsset = async (req, res) => {
 }
 
 const deleteAsset = async (req, res) => {
-    if (!req?.body?.id) {
+    if (!req.params.id) {
+        console.log("tutaj");
         return res.status(400).json({ "message": `ID parametr is required.` });
     }
-    const asset = await Asset.findOne({ _id: req.body.id })
+    const asset = await Asset.findOne({ _id: req.params.id })
     if (!asset) {
-        return res.status(400).json({ "message": `No asset maches: ${req.body.id}.` });
+        return res.status(400).json({ "message": `No asset maches: ${req.params.id}.` });
     }
-    const result = await Asset.deleteOne({ _id: req.body.id })
-    // console.log("🚀 ~ file: employeesController.js:50 ~ deleteEmployee ~ result:", result)
-    res.json(result);
+    const result = await Asset.deleteOne({ _id: req.params.id })
+    // res.json(result);
+    res.json(asset);
 }
 
 module.exports = {

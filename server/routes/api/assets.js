@@ -6,9 +6,9 @@ router.route('/')
     .post(assetController.createNewAsset)
     .get(assetController.getAllAssets)
     .put(assetController.updateAsset)
-    .delete(assetController.deleteAsset);
 
 router.route('/:id')
-    .get(assetController.getAsset);
+    .get(assetController.getAsset)
+    .delete (assetController.deleteAsset)
 
 module.exports = router;
