@@ -36,7 +36,6 @@ export default function NavbarComponent() {
               <CustomLink to="/assets" active>
                 Assets
               </CustomLink>
-              <CustomLink to="/employees">Employees</CustomLink>
               {/* <CustomLink to="/account">
                 <FontAwesomeIcon icon={faCircleUser} /> Username
               </CustomLink> */}
