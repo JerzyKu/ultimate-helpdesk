@@ -7,11 +7,11 @@ import NewEmployee from './features/employees/NewEmployee';
 import Account from './pages/Account';
 import Register from './pages/Register';
 import AssetsList from './features/assets/AssetsList';
-import UsersList from './pages/UsersList';
 import SingleAssetPage from './features/assets/SingleAssetPage';
 import EditAssetForm from './features/assets/EditAssetForm';
 import NotFound from './components/NotFound';
 import AddAssetForm from './features/assets/AddAssetForm';
+import Userslist from './features/users/UsersList';
 
 
 function App() {
@@ -34,7 +34,7 @@ function App() {
         </Route>
 
         <Route path='users' >
-          <Route index element={<UsersList />} />
+          <Route index element={<Userslist />} />
         </Route>
 
         <Route path='account' element={<Account />} />
