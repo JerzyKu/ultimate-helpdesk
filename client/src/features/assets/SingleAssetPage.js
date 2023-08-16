@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { deleteAsset, selectAssetByID } from './assetsSlice';
+import { deleteAsset, selectAssetById } from './assetsSlice';
 import AssetOwner from './AssetOwner';
 import Button from 'react-bootstrap/Button';
 
@@ -9,7 +9,7 @@ export default function SingleAssetPage() {
     const  { id } = useParams();
     const dispach = useDispatch()
     const navigate = useNavigate()
-    const assetData = useSelector(state => selectAssetByID(state, id))
+    const assetData = useSelector(state => selectAssetById(state, id))
 
     const onDeleteClick = () => {
         try {
@@ -28,7 +28,7 @@ export default function SingleAssetPage() {
         createdAt: {assetData?.createdAt}<br />
         last update: {assetData?.updatedAt}<br />
         Owner: <AssetOwner userID={assetData?.ownerID} /> <br />
-        <Link to={`/assets/edit/${assetData?._id}`}>Edit</Link>
+        <Button variant='success' as={Link} to={`/assets/edit/${assetData?._id}`}>Edit</Button>
         <Button variant='danger' onClick={onDeleteClick}>delete</Button>
     </div>
 

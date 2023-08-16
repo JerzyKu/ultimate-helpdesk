@@ -10,6 +10,7 @@ import EditAssetForm from './features/assets/EditAssetForm';
 import NotFound from './components/NotFound';
 import AddAssetForm from './features/assets/AddAssetForm';
 import Userslist from './features/users/UsersList';
+import SingleUserPage from './features/users/SingleUserPage';
 
 
 function App() {
@@ -28,7 +29,7 @@ function App() {
 
         <Route path='users' >
           <Route index element={<Userslist />} />
-          <Route path=':id' element={<Userslist />} />
+          <Route path=':id' element={<SingleUserPage />} />
         </Route>
 
         <Route path='account' element={<Account />} />

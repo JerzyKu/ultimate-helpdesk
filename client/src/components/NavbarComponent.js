@@ -36,15 +36,10 @@ export default function NavbarComponent() {
               <CustomLink to="/assets" active>
                 Assets
               </CustomLink>
-              {/* <CustomLink to="/account">
-                <FontAwesomeIcon icon={faCircleUser} /> Username
-              </CustomLink> */}
+              <CustomLink to={`/users`} >Users</CustomLink>
               <NavDropdown title={`{{Username}}`} id="basic-nav-dropdown">
                 <NavDropdown.Item as={Link} to={`/account`}>Account</NavDropdown.Item>
-                <NavDropdown.Divider /> {/* --------------------------------------------------------------- */}
-                <NavDropdown.Item as={Link} to={`/register`}>Create new account</NavDropdown.Item>
-                <NavDropdown.Item as={Link} to={`/users`}>lost of users</NavDropdown.Item>
-                <NavDropdown.Divider /> {/* --------------------------------------------------------------- */}
+                <NavDropdown.Divider /> 
                 <NavDropdown.Item as={Link} to={`/login`}>
                   LogOut
                 </NavDropdown.Item>

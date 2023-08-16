@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import { selectAssetByID, updateAsset } from "./assetsSlice";
+import { selectAssetById, updateAsset } from "./assetsSlice";
 import { selectAllUsers } from "../users/usersSlice";
 
 import Form from 'react-bootstrap/Form';
@@ -13,7 +13,7 @@ export default function EditAssetForm() {
     const navigate = useNavigate()
 
     const usersList = useSelector(selectAllUsers)
-    const asset = useSelector(state => selectAssetByID(state, id))
+    const asset = useSelector(state => selectAssetById(state, id))
 
     const [assetName, setAssetName] = useState(asset?.name)
     const [assetInvSymbol, setAssetInvSymbol] = useState(asset?.invSymbol)

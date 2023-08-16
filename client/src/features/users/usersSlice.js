@@ -21,5 +21,7 @@ const assetsSlice = createSlice({
 
 export const selectAllUsers = (state) => state.users;
 
+export const selectUserById = (state, userID) => state.users.find( user => user._id === userID )
+
 export default assetsSlice.reducer;
 

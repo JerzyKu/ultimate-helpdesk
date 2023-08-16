@@ -7,14 +7,14 @@ export default function Userslist() {
 
     const renderedUsers = users.map(user => (
         <li key={user._id}>
-            <Link to={`/user/${user._id}`} >{user.username}</Link>
+            <Link to={`/users/${user._id}`} >{user.username}</Link>
         </li>
-    )
-    )
+    ))
 
     return (
         <section>
             <h2>Users</h2>
+            <hr/>
             <ul>
                 {renderedUsers}
             </ul>

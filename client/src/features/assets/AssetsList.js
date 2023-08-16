@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { getAssetsError, getAssetsStatus, selectAllAssets } from "./assetsSlice";
+import { getAssetsError, getAssetsStatus, selectAssetsIds } from "./assetsSlice";
 
 // reat-bootstrap
 import Table from "react-bootstrap/Table";
@@ -12,21 +12,21 @@ import Button from "react-bootstrap/Button";
 
 export default function AssetsList() {
 
-  const assets = useSelector(selectAllAssets);
+  const assetsIds = useSelector(selectAssetsIds);
   const assetsStatus = useSelector(getAssetsStatus);
   const assetsError = useSelector(getAssetsError);
 
   const table = <Table hover striped>
     <thead>
       <tr>
-        <th>ID</th>
         <th className="hearderStyles">Name</th>
         <th style={{}}>Inventory Number</th>
         <th>Status</th>
+        <th>Actions</th>
       </tr>
     </thead>
-    <tbody>{assets.map((asset) => {
-      return <AssetRow key={asset._id} asset={asset} />
+    <tbody>{assetsIds.map((assetId) => {
+      return <AssetRow key={assetId} assetId={assetId} />
     })}</tbody>
   </Table>
 
