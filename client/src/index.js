@@ -7,12 +7,13 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Provider } from "react-redux";
 import { store } from "./app/store";
 import { fetchUsers } from "./features/users/usersSlice";
-import { fetchAssets } from "./features/assets/assetsSlice";
 
 import "./style.css";
 
+import { extendetApiSlice } from "./features/assets/assetsSlice";
+
+store.dispatch(extendetApiSlice.endpoints.getAssets.initiate())
 store.dispatch(fetchUsers())
-store.dispatch(fetchAssets())
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
