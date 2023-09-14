@@ -1,6 +1,8 @@
 import Table from "react-bootstrap/Table";
 import UsersRow from "./UsersRow";
 import { useGetUsersQuery } from "./usersApiSlice";
+import Button from "react-bootstrap/Button";
+import { Link } from "react-router-dom";
 
 export default function Userslist() {
   const {
@@ -38,7 +40,9 @@ export default function Userslist() {
 
     content = (
       <>
-        <h2>Users</h2><hr/> {/*ul*/}
+        <h2>Users</h2>
+        <Button as={Link} to={'/users/new'}>+ Add new User</Button>
+        <hr/> 
         <Table hover striped>
           <thead>
             <tr>
