@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux"
-import { selectUserById } from "./usersSlice"
-import { selectAssetsByOwner } from "../assets/assetsSlice"
+// import { selectUserById } from "./usersSlice"
+// import { selectAssetsByOwner } from "../assets/assetsSlice"
 import { Link, useParams } from "react-router-dom"
 import Table from "react-bootstrap/Table"
 import Button from "react-bootstrap/esm/Button"

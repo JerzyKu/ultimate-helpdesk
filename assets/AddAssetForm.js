@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { addNewAsset } from "./assetsSlice";
-import { selectAllUsers } from "../users/usersSlice";
+// import { addNewAsset } from "./assetsSlice";
+// import { selectAllUsers } from "../users/usersSlice";
 
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
@@ -17,7 +17,7 @@ export default function AddAssetForm() {
   const [userID, setUserID] = useState("");
   const [addRequestStatus, setAddRequestStatus] = useState("idle");
 
-  const users = useSelector(selectAllUsers);
+  const users = [] //useSelector(selectAllUsers);
 
   const onNameChange = (e) => setName(e.target.value);
   const onInvSymbolChange = (e) => setInvSymbol(e.target.value);
@@ -30,7 +30,7 @@ export default function AddAssetForm() {
     if (canSave) {
       try {
         setAddRequestStatus("pending");
-        dispatch(addNewAsset({ name, invSymbol, userID })).unwrap(); // return promisse: action.payload or throw error
+        // dispatch(addNewAsset({ name, invSymbol, userID })).unwrap(); // return promisse: action.payload or throw error
 
 
       } catch (error) {

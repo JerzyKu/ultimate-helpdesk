@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { deleteAsset, selectAssetById } from './assetsSlice';
+// import { deleteAsset, selectAssetById } from './assetsSlice';
 import AssetOwner from './AssetOwner';
 import Button from 'react-bootstrap/Button';
 
