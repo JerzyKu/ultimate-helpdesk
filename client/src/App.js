@@ -7,7 +7,8 @@ import Register from "./pages/Register";
 import NotFound from "./components/NotFound";
 import Userslist from "./features/users/UsersList";
 import Prefetch from "./features/auth/Prefetch";
-// import SingleUserPage from './features/users/SingleUserPage';
+import EditUser from "./features/users/EditUser";
+import NewUserForm from "./features/users/NewUserForm";
 
 function App() {
   return (
@@ -19,7 +20,8 @@ function App() {
         <Route element={<Prefetch />}>
           <Route path="users">
             <Route index element={<Userslist />} />
-            {/* <Route path=':id' element={<SingleUserPage />} /> */}
+            <Route path=':id' element={<EditUser />} />
+            <Route path='new' element={<NewUserForm />} />
           </Route>
         </Route>
 
