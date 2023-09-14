@@ -37,29 +37,24 @@ export default function Userslist() {
       : null;
 
     content = (
-      <Table hover striped>
-        <thead>
-          <tr>
-            <td><b>Name</b></td>
-            <td><b>Roles</b></td>
-          </tr>
-        </thead>
-        <tbody>{tableContent}</tbody>
-      </Table>
+      <>
+        <h2>Users</h2><hr/> {/*ul*/}
+        <Table hover striped>
+          <thead>
+            <tr>
+              <td>
+                <b>Name</b>
+              </td>
+              <td>
+                <b>Roles</b>
+              </td>
+            </tr>
+          </thead>
+          <tbody>{tableContent}</tbody>
+        </Table>
+      </>
     );
   }
 
   return content;
-  //   return (
-  //     <>users list
-  //         {/* {JSON.stringify(users)} */}
-  //     </>
-  //     // <section>
-  //     //     <h2>Users</h2>
-  //     //     <hr/>
-  //     //     <ul>
-  //     //         {renderedUsers}
-  //     //     </ul>
-  //     // </section>
-  //   );
 }
