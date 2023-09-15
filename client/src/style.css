@@ -6,3 +6,7 @@
 body {
     background-color: #eee;
 }
+
+.cursor-pointer{
+    cursor: pointer;
+}
