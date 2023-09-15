@@ -23,8 +23,8 @@ export default function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-        const response = await axios.post('/register', {user, pwd})
-        console.log(response);
+        // const response = await axios.post('/register', {user, pwd})
+        // console.log(response);
         setUser('')
         setPwd('')
     } catch (error) {

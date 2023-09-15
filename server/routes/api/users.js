@@ -3,7 +3,7 @@ const router = express.Router();
 const usersController = require('../../controllers/usersController');
 
 router.route('/')
-    // .post(assetController.createNewAsset)
+    .post(usersController.createNewUser)
     .get(usersController.getAllUsers)
     // .put(assetController.updateAsset)
     // .delete(assetController.deleteAsset);
