@@ -12,7 +12,7 @@ export default function Userslist() {
     isError,
     error,
   } = useGetUsersQuery(undefined, {
-    pollingInterval: 1000, // 1s <- change to prod
+    pollingInterval: 10000, // 10s <- change to prod
     refetchOnFocus: true,
     refetchOnMountOrArgChange: true,
   });
