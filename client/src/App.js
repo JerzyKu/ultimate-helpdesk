@@ -1,14 +1,20 @@
 import { Routes, Route } from "react-router-dom";
 import Layout from "./Layout";
+
 import Home from "./features/auth/Home";
+import Prefetch from "./features/auth/Prefetch";
+
 import LogInPage from "./pages/LogInPage";
 import Account from "./pages/Account";
 import Register from "./pages/Register";
 import NotFound from "./components/NotFound";
+
 import Userslist from "./features/users/UsersList";
-import Prefetch from "./features/auth/Prefetch";
 import EditUser from "./features/users/EditUser";
 import NewUserForm from "./features/users/NewUserForm";
+
+import AssetsList from "./features/assets/AssetsList";
+import NewAssetForm from "./features/assets/NewAssetForm";
 
 function App() {
   return (
@@ -18,12 +24,20 @@ function App() {
         <Route index element={<Home />} />
 
         <Route element={<Prefetch />}>
+
           <Route path="users">
             <Route index element={<Userslist />} />
-            <Route path=':id' element={<EditUser />} />
-            <Route path='new' element={<NewUserForm />} />
+            <Route path=":id" element={<EditUser />} />
+            <Route path="new" element={<NewUserForm />} />
+          </Route> {/* users */}
+
+          <Route path="assets" >
+            <Route index element={<AssetsList />}/>
+            {/* <Route path=":id" element={<EditUser />} /> */}
+            <Route path="new" element={<NewAssetForm />} />
           </Route>
-        </Route>
+
+        </Route> {/* Prefetch */}
 
         <Route path="account" element={<Account />} />
         <Route path="register" element={<Register />} />

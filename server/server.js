@@ -24,9 +24,9 @@ app.use(express.json());
 app.use(cookieParser())
 
 // // simulate delay response
-// app.use((req, res, next) => {
-//     setTimeout(() => next(), 2000);
-// });
+app.use((req, res, next) => {
+    setTimeout(() => next(), 2000);
+});
 
 // routes
 // app.use('/', require('./routes/root'));
