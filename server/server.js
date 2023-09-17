@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose')
 const connectDB = require('./config/dbConn');
 const { isAdminExist } = require('./isAdminExist');
+const { logger } = require('./middleware/logger');
 const PORT = process.env.PORT || 3500;
 
 // Connect yo MongoDB
@@ -22,6 +23,9 @@ app.use(express.json());
 
 //middleware for cookies
 app.use(cookieParser())
+
+// custom middleware for loggin actions 
+app.use(logger)
 
 // // simulate delay response
 app.use((req, res, next) => {

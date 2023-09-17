@@ -18,7 +18,7 @@ export default function NewAssetForm() {
             id="name"
             placeholder="Enter name"
             value={name}
-            onChange={() => e => setName(e.target.value)}
+            onChange={ e => setName(e.target.value)}
             required
             isInvalid
           />
@@ -32,7 +32,7 @@ export default function NewAssetForm() {
             id="invSymbol"
             placeholder="Enter inventory number"
             value={invSymbol}
-            onChange={() => e => setInvSymbol(e.target.value)}
+            onChange={ e => setInvSymbol(e.target.value)}
             required
             isValid
           />
