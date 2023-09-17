@@ -4,6 +4,7 @@ import Button from "react-bootstrap/esm/Button";
 import Table from "react-bootstrap/esm/Table";
 import AssetsRow from "./AssetsRow";
 import { Link } from "react-router-dom";
+import Spinner from "react-bootstrap/Spinner";
 
 export default function AssetsList() {
   const {
@@ -21,7 +22,7 @@ export default function AssetsList() {
   let content = <>nothing</>
 
   if (isLoading) {
-    content = <div>Loading...</div>;
+    content = <Spinner />
   }
   if (isError) {
     content = (

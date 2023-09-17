@@ -3,6 +3,7 @@ import UsersRow from "./UsersRow";
 import { useGetUsersQuery } from "./usersApiSlice";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
+import Spinner from 'react-bootstrap/Spinner';
 
 export default function Userslist() {
   const {
@@ -28,7 +29,7 @@ export default function Userslist() {
   }
 
   if (isLoading) {
-    content = <div>Loading...</div>;
+    content = <Spinner />
   }
 
   if (isSuccess) {
