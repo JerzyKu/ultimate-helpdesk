@@ -38,8 +38,6 @@ export default function AssetsList() {
     ));
 
     content = (<>
-    {JSON.stringify(assets)}
-    {JSON.stringify(ids)}
     <Table striped hover>
       <thead>
         <tr>
