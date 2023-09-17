@@ -15,6 +15,7 @@ import NewUserForm from "./features/users/NewUserForm";
 
 import AssetsList from "./features/assets/AssetsList";
 import NewAssetForm from "./features/assets/NewAssetForm";
+import EditAsset from "./features/assets/EditAsset";
 
 function App() {
   return (
@@ -33,7 +34,7 @@ function App() {
 
           <Route path="assets" >
             <Route index element={<AssetsList />}/>
-            {/* <Route path=":id" element={<EditUser />} /> */}
+            <Route path=":id" element={<EditAsset/>} />
             <Route path="new" element={<NewAssetForm />} />
           </Route>
 
