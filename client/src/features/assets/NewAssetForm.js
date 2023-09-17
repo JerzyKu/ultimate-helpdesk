@@ -4,6 +4,7 @@ import { useAddNewAssetMutation } from "./assetsApiSlice";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Alert from "react-bootstrap/Alert";
+import { useGetUsersQuery } from "../users/usersApiSlice";
 
 export default function NewAssetForm() {
   const [name, setName] = useState("");
@@ -11,6 +12,14 @@ export default function NewAssetForm() {
 
   const [addNewAsset, { isLoading, isSuccess, isError, error }] =
     useAddNewAssetMutation();
+
+    const {
+      data: users,
+      isLoading: isUsersLoading,
+      isSuccess: isUsersLoadingSucces,
+      isError: isUsersLoadingError,
+      error: usersLoadingError,
+    } = useGetUsersQuery()
 
 
     const canSave = [name.length, invSymbol.length].every(Boolean) && !isLoading
@@ -23,15 +32,21 @@ export default function NewAssetForm() {
         }
     }
 
+    const { ids } = users
+
+    const options = ids.map( id =>  <option >{users.entities[id].username}</option>)
+
   return (
     <>
       <h2>Add new Asset</h2>
       {isError && (
         <Alert variant="danger">error: {JSON.stringify(error)}</Alert>
       )}
-      {`${isSuccess}`}
-      {`${isLoading}`}
-      {`${canSave}`}
+      {`${isSuccess}`}<hr />
+      {`${isLoading}`}<hr />
+      {`${canSave}`}<hr />
+      {isUsersLoadingSucces ? `users: ${JSON.stringify(users.entities['64bee022a5fe0e8b9c2c6fb8'])}` : 'Loading'}<hr />
+      {`Options: ${options}`}<hr />
       <Form onSubmit={onSaveAssetClicked}>
         <Form.Group className="mb-3">
           <Form.Label htmlFor="name">Name: </Form.Label>
@@ -69,7 +84,7 @@ export default function NewAssetForm() {
             //   onChange={onOwnerChange}
           >
             <option value="">-=- select owner -=-</option>
-            {/* {usersOptions} */}
+            {options}
           </Form.Select>
         </Form.Group>
 
