@@ -4,6 +4,7 @@ import { useAddNewAssetMutation } from "./assetsApiSlice";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Alert from "react-bootstrap/Alert";
+import Spinner from "react-bootstrap/Spinner";
 import { useGetUsersQuery } from "../users/usersApiSlice";
 
 export default function NewAssetForm() {
@@ -32,6 +33,7 @@ export default function NewAssetForm() {
         }
     }
 
+    
     const { ids } = users
 
     const options = ids.map( id =>  <option >{users.entities[id].username}</option>)
@@ -56,7 +58,7 @@ export default function NewAssetForm() {
             id="name"
             placeholder="Enter name"
             value={name}
-            onChange={() => e => setName(e.target.value)}
+            onChange={ e => setName(e.target.value)}
             required
             // isInvalid
           />
@@ -70,7 +72,7 @@ export default function NewAssetForm() {
             id="invSymbol"
             placeholder="Enter inventory number"
             value={invSymbol}
-            onChange={() => e => setInvSymbol(e.target.value)}
+            onChange={ e => setInvSymbol(e.target.value)}
             required
             // isValid
           />
@@ -93,7 +95,7 @@ export default function NewAssetForm() {
           // onClick={onSavePostClicked}
           disabled={!canSave}
         >
-          {/* <Spinner animation="grow" size='sm'/>  */}
+          {isLoading && <Spinner animation="grow" size='sm'/> }
           Add Asset
         </Button>
       </Form>
