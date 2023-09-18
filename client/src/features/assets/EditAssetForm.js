@@ -3,6 +3,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
 import { useGetUsersQuery } from "../users/usersApiSlice";
+import { useUpdateAssetMutation } from "./assetsApiSlice";
 
 export default function EditAssetForm({ asset }) {
   const [name, setName] = useState(asset.name);
@@ -17,6 +18,8 @@ export default function EditAssetForm({ asset }) {
     error: usersLoadingError,
   } = useGetUsersQuery();
 
+  const [updateAsset,{}] = useUpdateAssetMutation()
+
   let options
   if (isUsersLoading) {
     options = <option>Loading</option>;
@@ -29,6 +32,8 @@ export default function EditAssetForm({ asset }) {
       </option>
     ));
   }
+
+  // const canSave = 
 
   return (
     <>
@@ -79,9 +84,9 @@ export default function EditAssetForm({ asset }) {
 
         <Button
           type="Submit"
-          //   disabled={!canSave}
+            // disabled={!canSave}
         >
-          {/* {isLoading && <Spinner animation="grow" size="sm" />} */}
+          {isUsersLoading && <Spinner animation="grow" size="sm" />}
           Add Asset
         </Button>
       </Form>

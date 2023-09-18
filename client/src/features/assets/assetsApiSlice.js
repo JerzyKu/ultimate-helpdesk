@@ -39,13 +39,26 @@ export const asstesApiSlice = apiSlice.injectEndpoints({
             invalidatesTags: [
                 {type: 'Asset', id: 'LIST'}
             ]
+        }),
+        updateAsset: builder.mutation({
+            query: initialAsset => ({
+                url: 'assets',
+                method: 'PATCH',
+                body: {
+                    ...initialAsset
+                }
+            }),
+            invalidatesTags: (result, error, arg) => [
+                {type: 'Asset', id: arg.id}
+            ]
         })
     })
 })
 
 export const {
     useGetAssetsQuery,
-    useAddNewAssetMutation
+    useAddNewAssetMutation,
+    useUpdateAssetMutation
 } = asstesApiSlice
 
 export const selectAssetsResult =asstesApiSlice.endpoints.getAssets.select()

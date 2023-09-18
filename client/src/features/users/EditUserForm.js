@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useAddNewUserMutation } from "./usersApiSlice";
+// import { useAddNewUserMutation } from "./usersApiSlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSave } from "@fortawesome/free-solid-svg-icons";
 import Button from "react-bootstrap/Button";
@@ -10,9 +10,9 @@ import { useNavigate } from "react-router-dom";
 const USER_REGEX = /^[A-z]{3,20}$/;
 const PWD_REGEX = /^[A-z0-9!@#$%]{4,14}$/;
 
-export default function EditUserForm({user}) {
-  const [addNewUser, { isLoading, isSuccess, isError, error }] =
-    useAddNewUserMutation();
+export default function EditUserForm({ user }) {
+  // const [addNewUser, { isLoading, isSuccess, isError, error }] =
+  //   useAddNewUserMutation();
 
   const navigate = useNavigate();
 
@@ -21,38 +21,40 @@ export default function EditUserForm({user}) {
   const [password, setPassword] = useState("");
   const [validPassword, setValidPassword] = useState(false);
 
-  useEffect(() => {
-    setValidUsername(USER_REGEX.test(username));
-  }, [username]);
+  // useEffect(() => {
+  //   setValidUsername(USER_REGEX.test(username));
+  // }, [username]);
 
-  useEffect(() => {
-    setValidPassword(PWD_REGEX.test(password));
-  }, [password]);
+  // useEffect(() => {
+  //   setValidPassword(PWD_REGEX.test(password));
+  // }, [password]);
 
-  useEffect(() => {
-    if (isSuccess) {
-      setUsername('')
-      setPassword('')
-    //   setRoles([])
-      navigate('/users')
-    }
-  }, [isSuccess, navigate])
+  // useEffect(() => {
+  //   if (isSuccess) {
+  //     setUsername('')
+  //     setPassword('')
+  //   //   setRoles([])
+  //     navigate('/users')
+  //   }
+  // }, [isSuccess, navigate])
 
-  const canSave = [validUsername, validPassword].every(Boolean) && !isLoading
+  // const canSave = [validUsername, validPassword].every(Boolean) && !isLoading
 
-  const onSaveUseClicked = async (e) => {
-    e.preventDefault();
-    if (canSave) {
-        await addNewUser({username, password})
-    }
-  };
+  // const onSaveUseClicked = async (e) => {
+  //   e.preventDefault();
+  //   if (canSave) {
+  //     await addNewUser({ username, password });
+  //   }
+  // };
   const content = (
     <>
-      {isError && (
+      {/* {isError && (
         <Alert variant="danger">error: {JSON.stringify(error)}</Alert>
-      )}
+      )} */}
       <h2>New User</h2>
-      <Form className="form" onSubmit={onSaveUseClicked}>
+      <Form className="form"
+      //  onSubmit={onSaveUseClicked}
+       >
         <Form.Group className="mb-3" controlId="user">
           <Form.Label>Username:</Form.Label>
           <Form.Control
@@ -81,7 +83,12 @@ export default function EditUserForm({user}) {
           <Form.Text className="text-muted">[4-12 chars incl !@#$%]</Form.Text>
         </Form.Group>
 
-        <Button className="icon-button" title="Save" disabled={!canSave} type="Submit">
+        <Button
+          className="icon-button"
+          title="Save"
+          // disabled={!canSave}
+          type="Submit"
+        >
           <FontAwesomeIcon icon={faSave} /> Update User
         </Button>
       </Form>

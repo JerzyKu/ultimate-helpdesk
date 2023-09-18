@@ -4,9 +4,8 @@ import Layout from "./Layout";
 import Home from "./features/auth/Home";
 import Prefetch from "./features/auth/Prefetch";
 
-import LogInPage from "./pages/LogInPage";
-import Account from "./pages/Account";
-import Register from "./pages/Register";
+import LogInPage from "./components/LogInPage";
+import Account from "./components/Account";
 import NotFound from "./components/NotFound";
 
 import Userslist from "./features/users/UsersList";
@@ -41,7 +40,6 @@ function App() {
         </Route> {/* Prefetch */}
 
         <Route path="account" element={<Account />} />
-        <Route path="register" element={<Register />} />
       </Route>
       <Route path="*" element={<NotFound />} />
     </Routes>
