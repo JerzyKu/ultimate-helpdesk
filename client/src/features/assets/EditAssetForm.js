@@ -18,7 +18,11 @@ export default function EditAssetForm({ asset }) {
     error: usersLoadingError,
   } = useGetUsersQuery();
 
-  const [updateAsset,{}] = useUpdateAssetMutation()
+  const [updateAsset,{
+    isLoading,
+    isSuccess,
+    isError, 
+    error}] = useUpdateAssetMutation()
 
   let options
   if (isUsersLoading) {
@@ -33,7 +37,12 @@ export default function EditAssetForm({ asset }) {
     ));
   }
 
-  // const canSave = 
+  const canSave = !isLoading || !isUsersLoading
+
+  const onFormUpdate = async e => {
+    e.preventDefault()
+    await updateAsset({name, invSymbol, id: asset.id, ownerID: userID })
+  }
 
   return (
     <>
@@ -41,7 +50,7 @@ export default function EditAssetForm({ asset }) {
       <hr />
         {`${JSON.stringify(asset)}`}
       <hr />
-      <Form>
+      <Form onSubmit={onFormUpdate}>
         <Form.Group className="mb-3">
           <Form.Label htmlFor="name">Name: </Form.Label>
           <Form.Control
@@ -78,16 +87,17 @@ export default function EditAssetForm({ asset }) {
             onChange={(e) => setUserID(e.target.value)}
           >
             {options}
-            <option value={""}>none</option>
+            <option value={'none'}>none</option>
           </Form.Select>
         </Form.Group>
 
         <Button
           type="Submit"
-            // disabled={!canSave}
+            disabled={!canSave}
+
         >
-          {isUsersLoading && <Spinner animation="grow" size="sm" />}
-          Add Asset
+          {(isUsersLoading || isLoading) && <Spinner animation="grow" size="sm" />}
+          Update Asset
         </Button>
       </Form>
     </>

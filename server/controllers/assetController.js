@@ -67,7 +67,14 @@ const updateAsset = async (req, res) => {
   }
   if (req.body?.name) asset.name = req.body.name;
   if (req.body?.invSymbol) asset.invSymbol = req.body.invSymbol;
-  if (req.body?.ownerID) asset.ownerID = req.body.ownerID;
+  if (req.body?.ownerID) {
+    if (req.body?.ownerID ==='none'){
+      asset.ownerID = undefined;
+    } else {
+      asset.ownerID = req.body.ownerID;
+    }
+    
+  }
   const result = await asset.save();
   res.json(result);
 };
