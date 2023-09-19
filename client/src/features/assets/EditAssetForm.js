@@ -8,7 +8,7 @@ import { useUpdateAssetMutation } from "./assetsApiSlice";
 export default function EditAssetForm({ asset }) {
   const [name, setName] = useState(asset.name);
   const [invSymbol, setInvSymbol] = useState(asset.invSymbol);
-  const [userID, setUserID] = useState(asset?.ownerID);
+  const [userID, setUserID] = useState(asset?.ownerID  ?? 'none');
 
   const {
     data: users,
@@ -41,7 +41,7 @@ export default function EditAssetForm({ asset }) {
 
   const onFormUpdate = async e => {
     e.preventDefault()
-    await updateAsset({name, invSymbol, id: asset.id, ownerID: userID })
+    await updateAsset({id: asset.id,name, invSymbol,  ownerID: userID })
   }
 
   return (
