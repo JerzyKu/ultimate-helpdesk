@@ -19,6 +19,10 @@ const userSchema = new Schema({
       require: true,
       unique: true,
     },
+    active: {
+      type: Boolean,
+      default: true
+    },
     roles: {
       User: {
         type: Number,
@@ -29,7 +33,7 @@ const userSchema = new Schema({
     },
     password: {
       type: String,
-      // require: true
+      require: true
     },
     refreshToken: {
       type: String,

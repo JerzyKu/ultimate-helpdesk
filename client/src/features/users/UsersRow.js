@@ -14,6 +14,9 @@ export default function UsersRow({ userId }) {
 
   return (
     <tr onClick={onClickRow} className="cursor-pointer">
+      <td>{user.firstName}</td>
+      <td>{user.lastName}</td>
+      <td>{user.jobTitle}</td>
       <td>{user.username}</td>
       <td>{JSON.stringify(user.roles)}</td>
     </tr>

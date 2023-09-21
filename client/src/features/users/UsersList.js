@@ -48,10 +48,19 @@ export default function Userslist() {
           <thead>
             <tr>
               <td>
-                <b>Name</b>
+                <b>First Name:</b>
               </td>
               <td>
-                <b>Roles</b>
+                <b>Last Name:</b>
+              </td>
+              <td>
+                <b>Job Title:</b>
+              </td>
+              <td>
+                <b>User Name:</b>
+              </td>
+              <td>
+                <b>Roles:</b>
               </td>
             </tr>
           </thead>
