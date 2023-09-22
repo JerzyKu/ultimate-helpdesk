@@ -11,7 +11,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Alert from "react-bootstrap/Alert";
 
-const USER_REGEX = /^[A-z]{3,20}$/;
+const USER_REGEX = /^[A-z._]{3,20}$/;
 const PWD_REGEX = /^[A-z0-9!@#$%]{4,14}$/;
 
 export default function NewUserForm() {
@@ -123,7 +123,7 @@ export default function NewUserForm() {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
-          <Form.Text className="text-muted">[3-20 letters]</Form.Text>
+          <Form.Text className="text-muted">[3-20 letters, incl ._]</Form.Text>
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="password">
