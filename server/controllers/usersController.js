@@ -71,11 +71,12 @@ const updateUser = asyncHandler(async (req, res) => {
   const user = await User.findOne({ _id: id }).exec();
   if (!user) return res.status(400).json({ message: `No user with Id: ${id}` });
 
-  const { password, roles, firstName, lastName, email, jobTitle, active} = req.body;
+  const { password, roles, firstName, lastName, email, jobTitle, active } =
+    req.body;
 
-  if (password){
+  if (password) {
     const hashedPwd = await bcrypt.hash(password, 10);
-    user.password = hashedPwd
+    user.password = hashedPwd;
   }
 
   if (firstName) user.firstName = firstName;
@@ -83,7 +84,7 @@ const updateUser = asyncHandler(async (req, res) => {
   if (lastName) user.lastName = lastName;
   if (email) user.email = email;
   if (jobTitle) user.jobTitle = jobTitle;
-  if (active) user.active = active;
+  if (active === true || active === false) user.active = active;
 
   const result = await user.save();
   res.json(result);

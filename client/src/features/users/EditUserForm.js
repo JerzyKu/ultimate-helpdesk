@@ -4,7 +4,7 @@ import { faSave } from "@fortawesome/free-solid-svg-icons";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Alert from "react-bootstrap/Alert";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { useUpdateUserMutation } from "./usersApiSlice";
 
 const PWD_REGEX = /^[A-z0-9!@#$%]{4,14}$/;
@@ -22,7 +22,7 @@ export default function EditUserForm({ user }) {
   const [lastName, setLastName] = useState(user?.lastName);
   const [jobTitle, setJobTitle] = useState(user?.jobTitle);
   const [email, setemail] = useState(user?.email);
-  const [active, setActive] = useState(user.active)
+  const [active, setActive] = useState(user.active);
 
   useEffect(() => {
     setValidPassword(PWD_REGEX.test(password));
@@ -37,7 +37,7 @@ export default function EditUserForm({ user }) {
   //   }
   // }, [isSuccess, navigate])
 
-  const canUpdate = true //[validUsername, validPassword].every(Boolean) && !isLoading
+  const canUpdate = true; //[validUsername, validPassword].every(Boolean) && !isLoading
 
   const onUpdateUseClicked = async (e) => {
     e.preventDefault();
@@ -49,7 +49,7 @@ export default function EditUserForm({ user }) {
         lastName,
         jobTitle,
         email,
-        active
+        active,
       });
     }
   };
@@ -88,7 +88,7 @@ export default function EditUserForm({ user }) {
             <Form.Label>Job Title:</Form.Label>
             <Form.Control
               type="text"
-              placeholder="Enter jobTitle"
+              placeholder="Enter Job Title"
               autoComplete="off"
               value={jobTitle}
               onChange={(e) => setJobTitle(e.target.value)}
@@ -126,13 +126,22 @@ export default function EditUserForm({ user }) {
             isValid={validPassword}
             isInvalid={password && !validPassword}
             type="password"
-            placeholder="Enter password(ony if you want to change)"
+            placeholder="Enter password (ony if you want to change)."
             autoComplete="off"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
           <Form.Text className="text-muted">[4-12 chars incl !@#$%]</Form.Text>
         </Form.Group>
+
+        <Form.Check
+          className="mb-3"
+          type="checkbox"
+          id="active"
+          label="Is Active"
+          checked={active}
+          onChange={() => setActive(prev => !prev)}
+        />
 
         <Button
           className="icon-button"
