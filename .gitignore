@@ -26,5 +26,5 @@ yarn-error.log*
 node_modules
 logs
 .log
-logs 
+logs
 .log
