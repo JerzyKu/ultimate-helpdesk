@@ -4,9 +4,8 @@ import Layout from "./Layout";
 import Home from "./features/auth/Home";
 import Prefetch from "./features/auth/Prefetch";
 
-import LogInPage from "./pages/LogInPage";
-import Account from "./pages/Account";
-import Register from "./pages/Register";
+import LogInPage from "./components/LogInPage";
+import Account from "./components/Account";
 import NotFound from "./components/NotFound";
 
 import Userslist from "./features/users/UsersList";
@@ -15,6 +14,7 @@ import NewUserForm from "./features/users/NewUserForm";
 
 import AssetsList from "./features/assets/AssetsList";
 import NewAssetForm from "./features/assets/NewAssetForm";
+import EditAsset from "./features/assets/EditAsset";
 
 function App() {
   return (
@@ -33,14 +33,13 @@ function App() {
 
           <Route path="assets" >
             <Route index element={<AssetsList />}/>
-            {/* <Route path=":id" element={<EditUser />} /> */}
+            <Route path=":id" element={<EditAsset/>} />
             <Route path="new" element={<NewAssetForm />} />
           </Route>
 
         </Route> {/* Prefetch */}
 
         <Route path="account" element={<Account />} />
-        <Route path="register" element={<Register />} />
       </Route>
       <Route path="*" element={<NotFound />} />
     </Routes>

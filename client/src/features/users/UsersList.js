@@ -3,7 +3,7 @@ import UsersRow from "./UsersRow";
 import { useGetUsersQuery } from "./usersApiSlice";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
-import Spinner from 'react-bootstrap/Spinner';
+import Spinner from "react-bootstrap/Spinner";
 
 export default function Userslist() {
   const {
@@ -29,7 +29,7 @@ export default function Userslist() {
   }
 
   if (isLoading) {
-    content = <Spinner />
+    content = <Spinner />;
   }
 
   if (isSuccess) {
@@ -42,16 +42,30 @@ export default function Userslist() {
     content = (
       <>
         <h2>Users</h2>
-        <Button as={Link} to={'/users/new'}>+ Add new User</Button>
-        <hr/> 
+        <Button as={Link} to={"/users/new"}>
+          + Add new User
+        </Button>
+        <hr />
         <Table hover striped>
           <thead>
             <tr>
               <td>
-                <b>Name</b>
+                <b>First Name:</b>
               </td>
               <td>
-                <b>Roles</b>
+                <b>Last Name:</b>
+              </td>
+              <td>
+                <b>Job Title:</b>
+              </td>
+              <td>
+                <b>User Name:</b>
+              </td>
+              <td>
+                <b>Active:</b>
+              </td>
+              <td>
+                <b>Roles:</b>
               </td>
             </tr>
           </thead>

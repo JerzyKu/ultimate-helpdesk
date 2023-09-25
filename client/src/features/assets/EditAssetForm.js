@@ -1,20 +1,14 @@
-import { useEffect, useState } from "react";
-
-import { useAddNewAssetMutation } from "./assetsApiSlice";
-import { useGetUsersQuery } from "../users/usersApiSlice";
-
+import { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import Alert from "react-bootstrap/Alert";
 import Spinner from "react-bootstrap/Spinner";
+import { useGetUsersQuery } from "../users/usersApiSlice";
+import { useUpdateAssetMutation } from "./assetsApiSlice";
 
-export default function NewAssetForm() {
-  const [name, setName] = useState("test");
-  const [invSymbol, setInvSymbol] = useState("test");
-  const [userID, setUserID] = useState("");
-
-  const [addNewAsset, { isLoading, isSuccess, isError, error }] =
-    useAddNewAssetMutation();
+export default function EditAssetForm({ asset }) {
+  const [name, setName] = useState(asset.name);
+  const [invSymbol, setInvSymbol] = useState(asset.invSymbol);
+  const [userID, setUserID] = useState(asset?.ownerID  ?? 'none');
 
   const {
     data: users,
@@ -24,19 +18,11 @@ export default function NewAssetForm() {
     error: usersLoadingError,
   } = useGetUsersQuery();
 
-  useEffect(() => {
-    setUserID(users.entities[users.ids[0]].id)
-    // eslint-disable-next-line
-  },[isUsersLoadingSucces])
-
-  const canSave = [name.length, invSymbol.length].every(Boolean) && !isLoading;
-
-  const onSaveAssetClicked = async (e) => {
-    e.preventDefault();
-    if (canSave) {
-      await addNewAsset({ name, invSymbol, userID });
-    }
-  };
+  const [updateAsset,{
+    isLoading,
+    isSuccess,
+    isError, 
+    error}] = useUpdateAssetMutation()
 
   let options
   if (isUsersLoading) {
@@ -51,20 +37,20 @@ export default function NewAssetForm() {
     ));
   }
 
+  const canSave = !isLoading || !isUsersLoading
+
+  const onFormUpdate = async e => {
+    e.preventDefault()
+    await updateAsset({id: asset.id,name, invSymbol,  ownerID: userID })
+  }
+
   return (
     <>
-      <h2>Add new Asset</h2>
-      {isError && (
-        <Alert variant="danger">error: {JSON.stringify(error)}</Alert>
-      )}
-      {isUsersLoadingError && (
-        <Alert variant="danger">
-          error: {JSON.stringify(usersLoadingError)}
-        </Alert>
-      )}
-      {isSuccess && <Alert variant="success">Asset Added</Alert>}
+      <h2>Edit Asset</h2>
       <hr />
-      <Form onSubmit={onSaveAssetClicked}>
+        {`${JSON.stringify(asset)}`}
+      <hr />
+      <Form onSubmit={onFormUpdate}>
         <Form.Group className="mb-3">
           <Form.Label htmlFor="name">Name: </Form.Label>
           <Form.Control
@@ -101,13 +87,17 @@ export default function NewAssetForm() {
             onChange={(e) => setUserID(e.target.value)}
           >
             {options}
-            <option value={''}>none</option>
+            <option value={'none'}>none</option>
           </Form.Select>
         </Form.Group>
 
-        <Button type="Submit" disabled={!canSave}>
-          {isLoading && <Spinner animation="grow" size="sm" />}
-          Add Asset
+        <Button
+          type="Submit"
+            disabled={!canSave}
+
+        >
+          {(isUsersLoading || isLoading) && <Spinner animation="grow" size="sm" />}
+          Update Asset
         </Button>
       </Form>
     </>

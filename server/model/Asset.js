@@ -14,7 +14,8 @@ const assetSchema = new Schema({
     ownerID: {
         type: mongoose.SchemaTypes.ObjectId,
         ref: "Employee"
-    }
+    },
+    decommissioned: Boolean
 }, {
     timestamps: true
 }

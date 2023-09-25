@@ -5,7 +5,7 @@ const assetController = require('../../controllers/assetController');
 router.route('/')
     .post(assetController.createNewAsset)
     .get(assetController.getAllAssets)
-    .put(assetController.updateAsset)
+    .patch(assetController.updateAsset)
 
 router.route('/:id')
     .get(assetController.getAsset)
