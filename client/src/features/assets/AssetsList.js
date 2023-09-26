@@ -33,6 +33,7 @@ export default function AssetsList() {
   }
   if (isSuccess) {
     const { ids } = assets;
+
     const rows = ids.map((assetId) => (
       <AssetsRow key={assetId} assetId={assetId} />
     ));
