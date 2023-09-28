@@ -1,4 +1,4 @@
-const Asset = require("../model/Asset");
+const Asset = require("../models/Asset");
 const asyncHandler = require("express-async-handler");
 
 const createNewAsset = asyncHandler(async (req, res) => {
