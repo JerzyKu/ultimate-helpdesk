@@ -5,7 +5,7 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose')
 const connectDB = require('./config/dbConn');
-const { isAdminExist } = require('./isAdminExist');
+const { isAdminExist } = require('./middleware/isAdminExist');
 const { logger } = require('./middleware/logger');
 const errorHandler = require('./middleware/errorHandler');
 const PORT = process.env.PORT || 3500;
@@ -34,6 +34,7 @@ app.use(logger)
 // });
 
 // routes
+app.use('/auth', require('./routes/authRoutes'))
 app.use('/users', require('./routes/api/users'));
 app.use('/assets', require('./routes/api/assets'))
 
