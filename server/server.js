@@ -7,6 +7,7 @@ const mongoose = require('mongoose')
 const connectDB = require('./config/dbConn');
 const { isAdminExist } = require('./isAdminExist');
 const { logger } = require('./middleware/logger');
+const errorHandler = require('./middleware/errorHandler');
 const PORT = process.env.PORT || 3500;
 
 // Connect yo MongoDB
@@ -33,17 +34,8 @@ app.use(logger)
 // });
 
 // routes
-// app.use('/', require('./routes/root'));
-app.use('/register', require('./routes/register'));
 app.use('/users', require('./routes/api/users'));
-// app.use('/auth', require('./routes/auth'));
-// app.use('/refresh', require('./routes/refresh'));
-// app.use('/logout', require('./routes/logout'));
-
-// app.use(verifyJWT)
-app.use('/employees', require('./routes/api/employees'));
 app.use('/assets', require('./routes/api/assets'))
-// app.use('/users', require('./routes/api/users'));
 
 app.all('*', (req, res) => {
     console.log('catch all :( ');
@@ -52,6 +44,7 @@ app.all('*', (req, res) => {
 
 });
 
+app.use(errorHandler)
 
 mongoose.connection.once('open', () => {
     console.log('Connected to mongo db')
