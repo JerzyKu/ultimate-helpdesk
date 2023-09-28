@@ -1,4 +1,4 @@
-const User = require('./model/User')
+const User = require('../models/User')
 const bcrypt = require('bcryptjs')
 
 
@@ -9,7 +9,7 @@ async function  isAdminExist() {
       const hashedPwd = await bcrypt.hash("zaq1@WSX", 10)
       const newAdmin = await User.create({
           "username": "Admin",
-          "pwd": hashedPwd,
+          "password": hashedPwd,
           "roles": {
               "User": 2001,
               "Admin": 6666
