@@ -1,5 +1,6 @@
-import React from "react";
-import { Link, useMatch, useResolvedPath } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useMatch, useResolvedPath, useNavigate } from "react-router-dom";
+import { useSendLogoutMutation } from "../features/auth/authApiSlice";
 
 //bootstrap
 import Container from "react-bootstrap/Container";
@@ -9,10 +10,19 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 
 //font awsome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFrog } from "@fortawesome/free-solid-svg-icons";
+import { faFrog, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 
 export default function NavbarComponent() {
   // console.log(window.location.pathname);
+  const navigate = useNavigate();
+
+  const [sendLogout, { isLoading, isSuccess, isError, error }] =
+    useSendLogoutMutation();
+
+  useEffect(() => {
+    if (isSuccess) navigate("/login");
+  }, [isSuccess, navigate]);
+
   return (
     <>
       <Navbar
@@ -36,12 +46,14 @@ export default function NavbarComponent() {
               <CustomLink to="/assets" active>
                 Assets
               </CustomLink>
-              <CustomLink to={`/users`} >Users</CustomLink>
+              <CustomLink to={`/users`}>Users</CustomLink>
               <NavDropdown title={`{{Username}}`} id="basic-nav-dropdown">
-                <NavDropdown.Item as={Link} to={`/account`}>Account</NavDropdown.Item>
-                <NavDropdown.Divider /> 
-                <NavDropdown.Item as={Link} to={`/login`}>
-                  LogOut
+                <NavDropdown.Item as={Link} to={`/account`}>
+                  Account
+                </NavDropdown.Item>
+                <NavDropdown.Divider />
+                <NavDropdown.Item onClick={() => sendLogout()}>
+                  <FontAwesomeIcon icon={faRightFromBracket} /> LogOut
                 </NavDropdown.Item>
               </NavDropdown>
             </Nav>
