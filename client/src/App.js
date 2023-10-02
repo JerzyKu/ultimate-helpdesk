@@ -1,10 +1,9 @@
 import { Routes, Route } from "react-router-dom";
-import Layout from "./Layout";
+import Layout from "./components/Layout";
 
 import Home from "./features/auth/Home";
 import Prefetch from "./features/auth/Prefetch";
 
-import LogInPage from "./components/LogInPage";
 import Account from "./components/Account";
 import NotFound from "./components/NotFound";
 
@@ -15,6 +14,8 @@ import NewUserForm from "./features/users/NewUserForm";
 import AssetsList from "./features/assets/AssetsList";
 import NewAssetForm from "./features/assets/NewAssetForm";
 import EditAsset from "./features/assets/EditAsset";
+
+import LogInPage from "./features/auth/LogInPage";
 
 function App() {
   return (

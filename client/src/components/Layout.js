@@ -1,5 +1,5 @@
 import React from 'react'
-import Navbar from './components/NavbarComponent'
+import Navbar from './NavbarComponent'
 import { Outlet } from 'react-router-dom'
 import Container from 'react-bootstrap/Container'
 
