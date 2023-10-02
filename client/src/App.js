@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
 
-import Home from "./features/auth/Home";
+import Home from "./components/Home";
 import Prefetch from "./features/auth/Prefetch";
 
 import Account from "./components/Account";
