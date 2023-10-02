@@ -8,13 +8,14 @@ const connectDB = require('./config/dbConn');
 const { isAdminExist } = require('./middleware/isAdminExist');
 const { logger } = require('./middleware/logger');
 const errorHandler = require('./middleware/errorHandler');
+const corsOptions = require('./config/corsOptions');
 const PORT = process.env.PORT || 3500;
 
 // Connect yo MongoDB
 connectDB()
 
 // Cross Origin Resource Sharing
-app.use(cors());
+app.use(cors(corsOptions))
 
 // built-in middleware to handle urlencoded form data
 app.use(express.urlencoded({ extended: false }));
