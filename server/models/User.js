@@ -24,13 +24,10 @@ const userSchema = new Schema({
       default: true
     },
     roles: {
-      User: {
-        type: Number,
-        default: 2001,
-      },
-      Editor: Number,
-      Admin: Number,
-    },
+      type: [String],
+      default: ['User']
+    }
+    ,
     password: {
       type: String,
       require: true
