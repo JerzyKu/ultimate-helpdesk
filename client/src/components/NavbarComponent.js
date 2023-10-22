@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { Link, useMatch, useResolvedPath, useNavigate } from "react-router-dom";
 import { useSendLogoutMutation } from "../features/auth/authApiSlice";
+import useAuth from "../hooks/useAuth";
 
 //bootstrap
 import Container from "react-bootstrap/Container";
@@ -15,6 +16,7 @@ import { faFrog, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 export default function NavbarComponent() {
   // console.log(window.location.pathname);
   const navigate = useNavigate();
+  const { username } = useAuth()
 
   const [sendLogout, { isLoading, isSuccess, isError, error }] =
     useSendLogoutMutation();
@@ -47,7 +49,7 @@ export default function NavbarComponent() {
                 Assets
               </CustomLink>
               <CustomLink to={`/users`}>Users</CustomLink>
-              <NavDropdown title={`{{Username}}`} id="basic-nav-dropdown">
+              <NavDropdown title={username} id="basic-nav-dropdown">
                 <NavDropdown.Item as={Link} to={`/account`}>
                   Account
                 </NavDropdown.Item>
