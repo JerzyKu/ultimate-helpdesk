@@ -3,17 +3,17 @@ const bcrypt = require('bcryptjs')
 
 
 async function  isAdminExist() {
-  const admin = await User.find({username: 'Admin'})
+  const admin = await User.find({username: 'admin'})
 
   if(!admin.length ){
       const hashedPwd = await bcrypt.hash("zaq1@WSX", 10)
       const newAdmin = await User.create({
-          "username": "Admin",
+          "username": "admin",
           "password": hashedPwd,
-          "roles": {
-              "User": 2001,
-              "Admin": 6666
-            }
+          "roles": [
+              "User",
+              "Admin"
+            ]
         })
         console.log("Admin account created");
     } else {
