@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
 
-import Home from "./components/Home";
+import Home from "./features/auth/Home";
 import Prefetch from "./features/auth/Prefetch";
 
 import Account from "./components/Account";
@@ -16,29 +16,33 @@ import NewAssetForm from "./features/assets/NewAssetForm";
 import EditAsset from "./features/assets/EditAsset";
 
 import LogInPage from "./features/auth/LogInPage";
+import RequireAuth from "./features/auth/RequireAuth";
+import { ROLES } from "./config/roles";
 
 function App() {
   return (
     <Routes>
       <Route path="/login" element={<LogInPage />} />
       <Route path="/" element={<Layout />}>
-        <Route index element={<Home />} />
-
-        <Route element={<Prefetch />}>
-
-          <Route path="users">
-            <Route index element={<Userslist />} />
-            <Route path=":id" element={<EditUser />} />
-            <Route path="new" element={<NewUserForm />} />
-          </Route> {/* users */}
-
-          <Route path="assets" >
-            <Route index element={<AssetsList />}/>
-            <Route path=":id" element={<EditAsset/>} />
-            <Route path="new" element={<NewAssetForm />} />
-          </Route>
-
-        </Route> {/* Prefetch */}
+        <Route
+          element={<RequireAuth allowedRoles={[...Object.values(ROLES)]} />}
+        >
+          <Route element={<Prefetch />}>
+            <Route index element={<Home />} />
+            <Route path="users">
+              <Route index element={<Userslist />} />
+              <Route path=":id" element={<EditUser />} />
+              <Route path="new" element={<NewUserForm />} />
+            </Route>{" "}
+            {/* users */}
+            <Route path="assets">
+              <Route index element={<AssetsList />} />
+              <Route path=":id" element={<EditAsset />} />
+              <Route path="new" element={<NewAssetForm />} />
+            </Route>
+          </Route>{" "}
+          {/* Prefetch */}
+        </Route>
 
         <Route path="account" element={<Account />} />
       </Route>
