@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import usePersist from "../../hooks/usePersist";
 
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
@@ -14,7 +15,9 @@ import { useDispatch } from "react-redux";
 
 export default function LogInPage() {
   const loginRef = useRef();
-  
+
+  const [persist, setPersist] = usePersist();
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
@@ -22,7 +25,7 @@ export default function LogInPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const [login, {isLoading}] = useLoginMutation()
+  const [login, { isLoading }] = useLoginMutation();
 
   useEffect(() => {
     loginRef.current.focus();
@@ -48,8 +51,7 @@ export default function LogInPage() {
       if (!err.status) {
         setErrorMsg("No Server Response.");
       } else if (err.status === 400) {
-        setErrorMsg("Missing Username or Password."); 
-        
+        setErrorMsg("Missing Username or Password.");
       } else if (err.status === 401) {
         setErrorMsg("Unauthorized.");
       } else {
@@ -58,6 +60,8 @@ export default function LogInPage() {
     }
   };
 
+  const handleTogglePersist = () => setPersist((prev) => !prev);
+
   return (
     <Container style={{ maxWidth: "400px", margin: "0 auto" }} className="mt-5">
       <h1>
@@ -65,9 +69,7 @@ export default function LogInPage() {
         Ultimate HD
       </h1>
       {errorMsg && (
-        <Alert
-          variant={"danger"}
-        >
+        <Alert variant={"danger"}>
           <FontAwesomeIcon icon={faCircleExclamation} /> {errorMsg}
         </Alert>
       )}
@@ -87,14 +89,24 @@ export default function LogInPage() {
 
         <Form.Group className="mb-3" controlId="formGroupPassword">
           <Form.Label>Password</Form.Label>
-          <Form.Control 
-          type="password" 
-          placeholder="Password" 
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-
+          <Form.Control
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
         </Form.Group>
+
+        <Form.Group className="m-3" controlId="persist">
+          <Form.Check
+            type="checkbox"
+            label="Trust this device."
+            checked={persist}
+            id="persist"
+            onChange={handleTogglePersist}
+          />
+        </Form.Group>
+
         <Button variant="success" className="ps-4 pe-4" type="submit">
           Login
         </Button>
