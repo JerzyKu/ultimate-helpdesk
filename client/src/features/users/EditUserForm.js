@@ -6,6 +6,7 @@ import Form from "react-bootstrap/Form";
 import Alert from "react-bootstrap/Alert";
 // import { useNavigate } from "react-router-dom";
 import { useUpdateUserMutation } from "./usersApiSlice";
+import Select from "react-select";
 
 const PWD_REGEX = /^[A-z0-9!@#$%]{4,14}$/;
 
@@ -134,13 +135,22 @@ export default function EditUserForm({ user }) {
           <Form.Text className="text-muted">[4-12 chars incl !@#$%]</Form.Text>
         </Form.Group>
 
+        <Select
+          // defaultValue={[colourOptions[2], colourOptions[3]]}
+          isMulti
+          name="colors"
+          options={rolesOptions}
+          className="basic-multi-select"
+          classNamePrefix="select"
+        />
+
         <Form.Check
           className="mb-3"
           type="checkbox"
           id="active"
           label="Is Active"
           checked={active}
-          onChange={() => setActive(prev => !prev)}
+          onChange={() => setActive((prev) => !prev)}
         />
 
         <Button
