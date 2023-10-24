@@ -48,6 +48,16 @@ export const asstesApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: (result, error, arg) => [{ type: "Asset", id: arg.id }],
     }),
+    deleteAsset: builder.mutation({
+      query: ({id}) => ({
+        url: `/assets/${id}`,
+        method: 'DELETE',
+        // body: { id }
+      }),
+      invalidatesTags: (result, error, arg ) =>  [
+        {type: `Asset`, id: arg.id }
+      ]
+    })
   }),
 });
 
@@ -55,6 +65,7 @@ export const {
   useGetAssetsQuery,
   useAddNewAssetMutation,
   useUpdateAssetMutation,
+  useDeleteAssetMutation
 } = asstesApiSlice;
 
 export const selectAssetsResult = asstesApiSlice.endpoints.getAssets.select();

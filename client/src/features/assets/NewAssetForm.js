@@ -9,9 +9,10 @@ import Alert from "react-bootstrap/Alert";
 import Spinner from "react-bootstrap/Spinner";
 
 export default function NewAssetForm() {
-  const [name, setName] = useState("test");
-  const [invSymbol, setInvSymbol] = useState("test");
+  const [name, setName] = useState("");
+  const [invSymbol, setInvSymbol] = useState("");
   const [userID, setUserID] = useState("");
+  const [serialNumber, setSerialNumber] = useState('')
 
   const [addNewAsset, { isLoading, isSuccess, isError, error }] =
     useAddNewAssetMutation();
@@ -24,17 +25,17 @@ export default function NewAssetForm() {
     error: usersLoadingError,
   } = useGetUsersQuery();
 
-  useEffect(() => {
-    setUserID(users.entities[users.ids[0]].id)
-    // eslint-disable-next-line
-  },[isUsersLoadingSucces])
+  // useEffect(() => {
+  //   setUserID(users.entities[users.ids[0]].id)
+  //   // eslint-disable-next-line
+  // },[isUsersLoadingSucces])
 
   const canSave = [name.length, invSymbol.length].every(Boolean) && !isLoading;
 
   const onSaveAssetClicked = async (e) => {
     e.preventDefault();
     if (canSave) {
-      await addNewAsset({ name, invSymbol, userID });
+      await addNewAsset({ name, invSymbol, userID, serialNumber });
     }
   };
 
@@ -88,6 +89,21 @@ export default function NewAssetForm() {
             placeholder="Enter inventory number"
             value={invSymbol}
             onChange={(e) => setInvSymbol(e.target.value)}
+            required
+            // isValid
+          />
+        </Form.Group>
+
+
+        <Form.Group className="mb-3">
+          <Form.Label htmlFor="serialNumber">serialNumber:</Form.Label>
+          <Form.Control
+            type="text"
+            name="serialNumber"
+            id="serialNumber"
+            placeholder="Enter serial number"
+            value={serialNumber}
+            onChange={(e) => setSerialNumber(e.target.value)}
             required
             // isValid
           />
