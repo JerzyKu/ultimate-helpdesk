@@ -35,21 +35,22 @@ function App() {
                 <Route index element={<Userslist />} />
                 <Route path=":id" element={<EditUser />} />
                 <Route path="new" element={<NewUserForm />} />
-              </Route>{" "}
-              {/* users */}
+              </Route>
+              {/* end of users */}
               <Route path="assets">
                 <Route index element={<AssetsList />} />
                 <Route path=":id" element={<EditAsset />} />
                 <Route path="new" element={<NewAssetForm />} />
               </Route>
-            </Route>{" "}
-            {/* Prefetch */}
+              <Route path="account" element={<Account />} />
+              <Route path="*" element={<NotFound />} />
+            </Route>
+            {/* end of Prefetch */}
           </Route>
-
-          <Route path="account" element={<Account />} />
+          {/* end of RequireAuth*/}
         </Route>
+        {/* end of PersistLogin*/}
       </Route>
-      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }
