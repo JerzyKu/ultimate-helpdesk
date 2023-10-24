@@ -30,7 +30,7 @@ export default function Account() {
       >
         <Form.Control type="text" placeholder="" />
       </FloatingLabel>
-
+not working <br/>
       <Button variant="primary">Change Password</Button>
     </>
   );
