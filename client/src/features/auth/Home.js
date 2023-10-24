@@ -4,13 +4,6 @@ import useAuth from '../../hooks/useAuth'
 
 export default function Home() {
   const { username, firstName } = useAuth()
-
-  console.log("username",username);
-  console.log("firstName",firstName);
-
-  console.log("firstName ? firstName : username", firstName ? firstName : username);
-  
-
   return (
     <>
       Hello {firstName ? firstName : username}!
