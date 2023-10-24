@@ -25,7 +25,7 @@ export default function LogInPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const [login, { isLoading }] = useLoginMutation();
+  const [login, { isLoading, isError, error }] = useLoginMutation();
 
   useEffect(() => {
     loginRef.current.focus();
@@ -73,6 +73,11 @@ export default function LogInPage() {
       {errorMsg && (
         <Alert variant={"danger"}>
           <FontAwesomeIcon icon={faCircleExclamation} /> {errorMsg}
+        </Alert>
+      )}
+      {isError && (
+        <Alert variant={"danger"}>
+          <FontAwesomeIcon icon={faCircleExclamation} /> {JSON.stringify(error)}
         </Alert>
       )}
       <Form onSubmit={handleSubmit}>
