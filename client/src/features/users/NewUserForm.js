@@ -70,6 +70,10 @@ export default function NewUserForm() {
     }
   };
 
+  const genPwd = () => {
+    setPassword(Math.random().toString(36).slice(2, 10))
+  };
+
   const rolesOptions = Object.values(ROLES).map((el) => ({
     value: el,
     label: el,
@@ -153,11 +157,11 @@ export default function NewUserForm() {
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="password">
-          <Form.Label>Password:</Form.Label>
+          <Form.Label>Password: <Button onClick={genPwd}  variant="outline-secondary" size="sm">genPwd</Button></Form.Label>
           <Form.Control
             isValid={validPassword}
             isInvalid={!validPassword}
-            type="password"
+            // type="password"
             placeholder="Enter password."
             autoComplete="off"
             value={password}
