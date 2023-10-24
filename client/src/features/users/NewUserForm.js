@@ -47,10 +47,10 @@ export default function NewUserForm() {
 
   useEffect(() => {
     if (isSuccess) {
-      setUsername("");
-      setPassword("");
+      // setUsername("");
+      // setPassword("");
       //   setRoles([])
-      navigate("/users");
+      // navigate("/users");
     }
   }, [isSuccess, navigate]);
 
@@ -66,6 +66,7 @@ export default function NewUserForm() {
         lastName,
         email,
         jobTitle,
+        roles: roles.map( el => el.value)
       });
     }
   };
