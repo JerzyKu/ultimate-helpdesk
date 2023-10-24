@@ -12,6 +12,6 @@ router.route('/')
 
 router.route('/:id')
     .get(assetController.getAsset)
-    .delete (assetController.deleteAsset)
+    .delete(assetController.deleteAsset)
 
 module.exports = router;

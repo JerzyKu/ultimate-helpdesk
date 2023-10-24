@@ -26,9 +26,7 @@ function App() {
       <Route path="/login" element={<LogInPage />} />
       <Route path="/" element={<Layout />}>
         <Route element={<PersistLogin />}>
-          <Route
-            element={<RequireAuth allowedRoles={[...Object.values(ROLES)]} />}
-          >
+          <Route element={<RequireAuth allowedRoles={[...Object.values(ROLES)]} />}>
             <Route element={<Prefetch />}>
               <Route index element={<Home />} />
               <Route path="users">

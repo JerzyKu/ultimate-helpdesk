@@ -15,7 +15,12 @@ const assetSchema = new Schema({
         type: mongoose.SchemaTypes.ObjectId,
         ref: "Employee"
     },
-    decommissioned: Boolean
+    decommissioned: Boolean,
+    serialNumber: {
+        type: String,
+        require: true,
+        // unique: true
+    }
 }, {
     timestamps: true
 }

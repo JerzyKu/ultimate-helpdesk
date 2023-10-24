@@ -1,8 +1,12 @@
 const Asset = require("../models/Asset");
 const asyncHandler = require("express-async-handler");
 
+
+// @desc Login
+// @route POST /auth
+// @access Private
 const createNewAsset = asyncHandler(async (req, res) => {
-  const { name, invSymbol, userID } = req.body;
+  const { name, invSymbol, userID, serialNumber } = req.body;
 
   //confirm data
   if (!name || !invSymbol) {
@@ -12,7 +16,7 @@ const createNewAsset = asyncHandler(async (req, res) => {
   }
 
   // const assetObj = { name, invSymbol, ownerID: userID };
-  const assetObj = { name, invSymbol };
+  const assetObj = { name, invSymbol, serialNumber};
   if (userID) {
     assetObj.ownerID = userID;
   }
@@ -30,12 +34,18 @@ const createNewAsset = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc 
+// @route 
+// @access Private 
 const getAllAssets = async (req, res) => {
   const assets = await Asset.find();
   if (!assets) return res.status(204).json({ message: "no Assets found." });
   res.json(assets);
 };
 
+// @desc 
+// @route 
+// @access Private 
 const getAsset = async (req, res) => {
   if (!req?.params?.id) {
     return res.status(400).json({ message: `ID parametr is required.` });
@@ -54,6 +64,9 @@ const getAsset = async (req, res) => {
   }
 };
 
+// @desc 
+// @route 
+// @access Private 
 const updateAsset = async (req, res) => {
   // console.log(req.body);
   if (!req?.body?.id) {
@@ -67,6 +80,7 @@ const updateAsset = async (req, res) => {
   }
   if (req.body?.name) asset.name = req.body.name;
   if (req.body?.invSymbol) asset.invSymbol = req.body.invSymbol;
+  if (req.body?.serialNumber) asset.serialNumber = req.body.serialNumber;
   if (req.body?.ownerID) {
     if (req.body?.ownerID ==='none'){
       asset.ownerID = undefined;
@@ -79,6 +93,9 @@ const updateAsset = async (req, res) => {
   res.json(result);
 };
 
+// @desc 
+// @route 
+// @access Private 
 const deleteAsset = async (req, res) => {
   if (!req.params.id) {
     console.log("tutaj");
