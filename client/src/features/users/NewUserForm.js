@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useAddNewUserMutation } from "./usersApiSlice";
 import { useNavigate } from "react-router-dom";
+import Select from "react-select";
+import { ROLES } from "../../config/roles";
 
 //fontAwsome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -28,6 +30,12 @@ export default function NewUserForm() {
   const [lastName, setLastName] = useState(undefined);
   const [jobTitle, setJobTitle] = useState(undefined);
   const [email, setemail] = useState(undefined);
+  const [roles, setRoles] = useState([
+    {
+      value: ROLES.User,
+      label: ROLES.User,
+    },
+  ]);
 
   useEffect(() => {
     setValidUsername(USER_REGEX.test(username));
@@ -61,6 +69,12 @@ export default function NewUserForm() {
       });
     }
   };
+
+  const rolesOptions = Object.values(ROLES).map((el) => ({
+    value: el,
+    label: el,
+  }));
+
   const content = (
     <>
       {isError && (
@@ -124,6 +138,18 @@ export default function NewUserForm() {
             onChange={(e) => setUsername(e.target.value)}
           />
           <Form.Text className="text-muted">[3-20 letters, incl ._]</Form.Text>
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="roles">
+          <Form.Label>Roles:</Form.Label>
+          <Select
+            defaultValue={roles}
+            // value={roles}
+            isMulti
+            name="roles"
+            options={rolesOptions}
+            onChange={setRoles}
+          />
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="password">

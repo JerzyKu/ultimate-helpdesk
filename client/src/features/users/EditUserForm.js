@@ -7,6 +7,7 @@ import Alert from "react-bootstrap/Alert";
 // import { useNavigate } from "react-router-dom";
 import { useUpdateUserMutation } from "./usersApiSlice";
 import Select from "react-select";
+import { ROLES } from "../../config/roles";
 
 const PWD_REGEX = /^[A-z0-9!@#$%]{4,14}$/;
 
@@ -24,6 +25,14 @@ export default function EditUserForm({ user }) {
   const [jobTitle, setJobTitle] = useState(user?.jobTitle);
   const [email, setemail] = useState(user?.email);
   const [active, setActive] = useState(user.active);
+  const [roles, setRoles] = useState(user.roles.map((el) => ({
+    value: el,
+    label: el,
+  })))
+
+  // console.log("roes map ", roles.map( el =>  el.value ? el.value : el ));
+
+  // console.log("roles ",roles);
 
   useEffect(() => {
     setValidPassword(PWD_REGEX.test(password));
@@ -41,6 +50,11 @@ export default function EditUserForm({ user }) {
   const canUpdate = true; //[validUsername, validPassword].every(Boolean) && !isLoading
 
   const onUpdateUseClicked = async (e) => {
+
+    const selectedRoles = roles.map( el => el.value )
+
+    console.log(selectedRoles);
+
     e.preventDefault();
     if (canUpdate) {
       await updateUser({
@@ -51,9 +65,16 @@ export default function EditUserForm({ user }) {
         jobTitle,
         email,
         active,
+        roles: selectedRoles
       });
     }
   };
+
+  const rolesOptions = Object.values(ROLES).map((el) => ({
+    value: el,
+    label: el,
+  }));
+
   const content = (
     <>
       {isError && (
@@ -135,14 +156,17 @@ export default function EditUserForm({ user }) {
           <Form.Text className="text-muted">[4-12 chars incl !@#$%]</Form.Text>
         </Form.Group>
 
-        <Select
-          // defaultValue={[colourOptions[2], colourOptions[3]]}
-          isMulti
-          name="colors"
-          options={rolesOptions}
-          className="basic-multi-select"
-          classNamePrefix="select"
-        />
+        <Form.Group className="mb-3" controlId="roles">
+          <Form.Label>Roles:</Form.Label>
+          <Select
+            defaultValue={roles}
+            // value={roles}
+            isMulti
+            name="roles"
+            options={rolesOptions}
+            onChange={setRoles}
+          />
+        </Form.Group>
 
         <Form.Check
           className="mb-3"
