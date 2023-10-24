@@ -47,10 +47,13 @@ export default function NewUserForm() {
 
   useEffect(() => {
     if (isSuccess) {
-      // setUsername("");
-      // setPassword("");
-      //   setRoles([])
-      // navigate("/users");
+      setUsername("");
+      setPassword("");
+        setRoles([{
+      value: ROLES.User,
+      label: ROLES.User,
+    }])
+      navigate("/users");
     }
   }, [isSuccess, navigate]);
 
