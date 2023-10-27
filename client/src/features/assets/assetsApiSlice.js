@@ -57,6 +57,22 @@ export const asstesApiSlice = apiSlice.injectEndpoints({
       invalidatesTags: (result, error, arg ) =>  [
         {type: `Asset`, id: arg.id }
       ]
+    }),
+    issueAsset: builder.mutation({
+      query:({userId, assetId}) => ({
+        url: "/assets/issue",
+        method: 'PATCH',
+        body: {userId, assetId}
+      }),
+      invalidatesTags: (result, error, arg) => [{ type: "Asset", id: arg.id }], // possible error, idk if id is right
+    }),
+    unissueAsset: builder.mutation({
+      query:({id}) => ({
+        url: "/assets/unissue",
+        method: 'PATCH',
+        body: {id}
+      }),
+      invalidatesTags: (result, error, arg) => [{ type: "Asset", id: arg.id }], // possible error, idk if id is right
     })
   }),
 });
@@ -65,7 +81,9 @@ export const {
   useGetAssetsQuery,
   useAddNewAssetMutation,
   useUpdateAssetMutation,
-  useDeleteAssetMutation
+  useDeleteAssetMutation,
+  useIssueAssetMutation,
+  useUnissueAssetMutation
 } = asstesApiSlice;
 
 export const selectAssetsResult = asstesApiSlice.endpoints.getAssets.select();
