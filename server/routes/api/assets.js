@@ -5,6 +5,12 @@ const verifyJWT = require('../../middleware/verifyJWT');
 
 router.use(verifyJWT)
 
+router.route('/issue')
+    .patch(assetController.issueAsset)
+
+router.route('/unissue')
+    .patch(assetController.unissueAsset)
+
 router.route('/')
     .post(assetController.createNewAsset)
     .get(assetController.getAllAssets)

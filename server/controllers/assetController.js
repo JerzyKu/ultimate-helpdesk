@@ -1,9 +1,9 @@
 const Asset = require("../models/Asset");
+const User = require("../models/User");
 const asyncHandler = require("express-async-handler");
 
-
-// @desc Login
-// @route POST /auth
+// @desc Create asset
+// @route POSt  /assets
 // @access Private
 const createNewAsset = asyncHandler(async (req, res) => {
   const { name, invSymbol, userID, serialNumber } = req.body;
@@ -16,7 +16,7 @@ const createNewAsset = asyncHandler(async (req, res) => {
   }
 
   // const assetObj = { name, invSymbol, ownerID: userID };
-  const assetObj = { name, invSymbol, serialNumber};
+  const assetObj = { name, invSymbol, serialNumber };
   if (userID) {
     assetObj.ownerID = userID;
   }
@@ -34,18 +34,18 @@ const createNewAsset = asyncHandler(async (req, res) => {
   }
 });
 
-// @desc 
-// @route 
-// @access Private 
+// @desc get all assets
+// @route GET  /assets
+// @access Private
 const getAllAssets = async (req, res) => {
   const assets = await Asset.find();
   if (!assets) return res.status(204).json({ message: "no Assets found." });
   res.json(assets);
 };
 
-// @desc 
-// @route 
-// @access Private 
+// @desc get asset by id
+// @route get  /assets/{id}
+// @access Private
 const getAsset = async (req, res) => {
   if (!req?.params?.id) {
     return res.status(400).json({ message: `ID parametr is required.` });
@@ -64,9 +64,9 @@ const getAsset = async (req, res) => {
   }
 };
 
-// @desc 
-// @route 
-// @access Private 
+// @desc update asset
+// @route PATCH  /assets
+// @access Private
 const updateAsset = async (req, res) => {
   // console.log(req.body);
   if (!req?.body?.id) {
@@ -82,20 +82,19 @@ const updateAsset = async (req, res) => {
   if (req.body?.invSymbol) asset.invSymbol = req.body.invSymbol;
   if (req.body?.serialNumber) asset.serialNumber = req.body.serialNumber;
   if (req.body?.ownerID) {
-    if (req.body?.ownerID ==='none'){
+    if (req.body?.ownerID === "none") {
       asset.ownerID = undefined;
     } else {
       asset.ownerID = req.body.ownerID;
     }
-    
   }
   const result = await asset.save();
   res.json(result);
 };
 
-// @desc 
-// @route 
-// @access Private 
+// @desc delete asset
+// @route DELETE  /assets
+// @access Private
 const deleteAsset = async (req, res) => {
   if (!req.params.id) {
     console.log("tutaj");
@@ -112,10 +111,58 @@ const deleteAsset = async (req, res) => {
   res.json(asset);
 };
 
+// @desc update asset
+// @route PATCH  /assets/issue
+// @access Private
+const issueAsset = asyncHandler (async (req, res) => {
+  if (!req?.body?.assetId || !req?.body?.userId ) {
+    return res.status(400).json({ message: `ID parametr is required.` });
+  }
+
+  const asset = await Asset.findOne({ _id: req.body.assetId });
+  if (!asset) {
+    return res
+      .status(400)
+      .json({ message: `No asset maches: ${req.body.assetId}.` });
+  }
+
+  const user = await User.findOne({ _id: req.body.userId });
+  if (!user) {
+    return res
+      .status(400)
+      .json({ message: `No user maches: ${req.body.userId}.` });
+  }
+
+  asset.ownerID = req.body.userId;
+
+  const result = await asset.save();
+  res.json(result);
+})
+
+const unissueAsset = asyncHandler( async (req, res) => {
+  if (!req?.body?.id ) {
+    return res.status(400).json({ message: `ID parametr is required.` });
+  }
+
+  const asset = await Asset.findOne({ _id: req.body.id });
+  if (!asset) {
+    return res
+      .status(400)
+      .json({ message: `No asset maches: ${req.body.id}.` });
+  }
+
+  asset.ownerID = undefined
+
+  const result = await asset.save();
+  res.json(result);
+})
+
 module.exports = {
   createNewAsset,
   getAllAssets,
   updateAsset,
   getAsset,
   deleteAsset,
+  issueAsset,
+  unissueAsset
 };
