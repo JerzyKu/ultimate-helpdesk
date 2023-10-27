@@ -1,11 +1,19 @@
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
+import useAuth from "../../hooks/useAuth";
 
 export default function Account() {
+
+ const {roles} = useAuth()
+
   return (
     <>
       <h3>Account</h3>
+
+      <hr/>
+      roles: {JSON.stringify(roles)}
+      <hr/>
 
       <FloatingLabel
         controlId="floatingInput"
