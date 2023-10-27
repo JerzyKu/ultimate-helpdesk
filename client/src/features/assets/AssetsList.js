@@ -5,8 +5,11 @@ import Table from "react-bootstrap/esm/Table";
 import AssetsRow from "./AssetsRow";
 import { Link } from "react-router-dom";
 import Spinner from "react-bootstrap/Spinner";
+import useAuth from "../../hooks/useAuth";
 
 export default function AssetsList() {
+
+  const {isAdmin} = useAuth()
   const {
     data: assets,
     isLoading,
@@ -45,6 +48,7 @@ export default function AssetsList() {
           <td><b>Name</b></td>
           <td><b>InventorySymbol</b></td>
           <td><b>Owner</b></td>
+          <td><b>Actions</b></td>
         </tr>
       </thead>
       <tbody>{rows}</tbody>
@@ -54,8 +58,10 @@ export default function AssetsList() {
 
   return (
     <>
-      <h2>Assets</h2>
-      <Button as={Link} to={'/assets/new'}>Add New Asset</Button>
+      <h2>Assets 
+
+      {isAdmin && <Button as={Link} to={'/assets/new'}>Add New Asset</Button>}
+      </h2>
       <hr />
       {content}
     </>
