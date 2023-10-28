@@ -94,8 +94,6 @@ export default function EditAssetForm({ asset }) {
       )}
       {isSuccess && <Alert variant="success">Success</Alert>}
       <h2>Edit Asset</h2>
-      {/* <hr />
-      {`${JSON.stringify(asset)}`} */}
       <hr />
       <Form onSubmit={onFormUpdate}>
         <Form.Group className="mb-3">
