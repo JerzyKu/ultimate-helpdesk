@@ -105,6 +105,11 @@ const deleteAsset = async (req, res) => {
       .status(400)
       .json({ message: `No asset maches: ${req.params.id}.` });
   }
+  if(asset?.ownerID){
+    return res
+      .status(400)
+      .json({ message: `Cannot delete issued asset.` });
+  }
   const result = await Asset.deleteOne({ _id: req.params.id });
   // res.json(result);
   res.json(asset);

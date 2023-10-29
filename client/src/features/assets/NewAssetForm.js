@@ -109,7 +109,7 @@ export default function NewAssetForm() {
           />
         </Form.Group>
 
-        <Form.Group className="mb-3">
+        {/* <Form.Group className="mb-3">
           <Form.Label htmlFor="owner">Owner: </Form.Label>
           <Form.Select
             id="owner"
@@ -119,7 +119,7 @@ export default function NewAssetForm() {
             {options}
             <option value={''}>none</option>
           </Form.Select>
-        </Form.Group>
+        </Form.Group> */}
 
         <Button type="Submit" disabled={!canSave}>
           {isLoading && <Spinner animation="grow" size="sm" />}
