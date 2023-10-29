@@ -16,7 +16,7 @@ import { faFrog, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 export default function NavbarComponent() {
   // console.log(window.location.pathname);
   const navigate = useNavigate();
-  const { username, firstName } = useAuth()
+  const { username, firstName, isAdmin } = useAuth()
 
   const [sendLogout, { isLoading, isSuccess, isError, error }] =
     useSendLogoutMutation();
@@ -45,10 +45,10 @@ export default function NavbarComponent() {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
               <CustomLink to="/">Home</CustomLink>
-              <CustomLink to="/assets" active>
+              <CustomLink to="/assets">
                 Assets
               </CustomLink>
-              <CustomLink to={`/users`}>Users</CustomLink>
+              {isAdmin && <CustomLink to={`/users`}>Users</CustomLink>}
               
               <NavDropdown title={firstName ? firstName : username} id="basic-nav-dropdown">
                 <NavDropdown.Item as={Link} to={`/account`}>
