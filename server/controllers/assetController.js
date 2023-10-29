@@ -97,7 +97,6 @@ const updateAsset = async (req, res) => {
 // @access Private
 const deleteAsset = async (req, res) => {
   if (!req.params.id) {
-    console.log("tutaj");
     return res.status(400).json({ message: `ID parametr is required.` });
   }
   const asset = await Asset.findOne({ _id: req.params.id });
