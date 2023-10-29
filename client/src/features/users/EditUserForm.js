@@ -198,8 +198,6 @@ export default function EditUserForm({ user }) {
         <Button
           className="icon-button"
           title="Delete"
-          // disabled={!canSave}
-          // type="Submit"
           variant="danger"
           onClick={onDeleteButtonClicked}
         >

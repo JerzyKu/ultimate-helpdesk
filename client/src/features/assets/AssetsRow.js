@@ -11,32 +11,38 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import useAuth from "../../hooks/useAuth";
 
-
 export default function AssetsRow({ assetId }) {
   const asset = useSelector((state) => selectAssetsById(state, assetId));
   const navigate = useNavigate();
-  const {isAdmin} =useAuth()
+  const { isAdmin, isHelpDesk } = useAuth();
 
   return (
-    // <tr className="cursor-pointer" onClick={() => navigate(`${asset.id}`)}>
     <tr>
       <td>{asset.name}</td>
       <td>{asset.invSymbol}</td>
-      <td>
-        <Owner id={asset.ownerID} />
-      </td>
-      <td>
-      {isAdmin && <Button variant="primary">
-          <FontAwesomeIcon
-            className="cursor-pointer"
-            icon={faPenToSquare}
-            onClick={() => navigate(`${asset.id}`)}
-          />
-        </Button>}
-        {!asset.ownerID 
-        ?<IssueAsset asset={asset} />
-        :<UnissueAsset asset={asset}/>}
-      </td>
+      {(isAdmin || isHelpDesk) && (
+        <>
+          <td>
+            <Owner id={asset.ownerID} />
+          </td>
+          <td>
+            {isAdmin && (
+              <Button variant="primary">
+                <FontAwesomeIcon
+                  className="cursor-pointer"
+                  icon={faPenToSquare}
+                  onClick={() => navigate(`${asset.id}`)}
+                />
+              </Button>
+            )}
+            {!asset.ownerID ? (
+              <IssueAsset asset={asset} />
+            ) : (
+              <UnissueAsset asset={asset} />
+            )}
+          </td>
+        </>
+      )}
     </tr>
   );
 }
