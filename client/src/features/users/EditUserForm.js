@@ -17,7 +17,7 @@ export default function EditUserForm({ user }) {
 
   const [
     deleteUser,
-    { isSuccess: idDelSuccess, isError: isDelError, delError },
+    { isSuccess: idDelSuccess, isError: isDelError, error: delError },
   ] = useDeleteUserMutation();
 
   const navigate = useNavigate();
@@ -78,14 +78,14 @@ export default function EditUserForm({ user }) {
     deleteUser({ id: user.id });
   };
 
-  const deleteAlert = null;
+  let deleteAlertAlert = null;
   if (isDelError) {
-    <Alert variant="danger">error: {JSON.stringify(delError)}</Alert>;
+    deleteAlertAlert = <Alert variant="danger">error: {JSON.stringify(delError)}</Alert>;
   }
 
   const content = (
     <>
-      {deleteAlert}
+      {deleteAlertAlert}
       {isError && (
         <Alert variant="danger">error: {JSON.stringify(error)}</Alert>
       )}
@@ -200,6 +200,7 @@ export default function EditUserForm({ user }) {
           title="Delete"
           variant="danger"
           onClick={onDeleteButtonClicked}
+          // disabled={}
         >
           <FontAwesomeIcon icon={faTrash} /> Delete User
         </Button>
