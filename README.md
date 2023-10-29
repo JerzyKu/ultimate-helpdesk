@@ -9,6 +9,6 @@
 
 Know bugs:
 
-- can issue asset to inactive user
+- [fix] can issue asset to inactive user
 - can delete user which have assign assets
 - can delete issued asset

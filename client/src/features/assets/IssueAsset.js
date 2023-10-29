@@ -48,11 +48,13 @@ export default function IssueAsset({ asset }) {
     options = { value: "Loandig", label: "Loandig" };
   }
   if (isUsersLoadingSucces) {
-    const { ids } = users;
-    options = ids.map((id) => ({
-      value: users.entities[id].id,
-      label: users.entities[id].username,
-    }));
+    const { ids, entities } = users;
+    options = ids
+      .filter((id) => entities[id].active)
+      .map((id) => ({
+        value: users.entities[id].id,
+        label: users.entities[id].username,
+      }));
     // <option key={id} value={id} default>
     //   {users.entities[id].username}
     // </option>
