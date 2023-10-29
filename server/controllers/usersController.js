@@ -90,8 +90,26 @@ const updateUser = asyncHandler(async (req, res) => {
   res.json(result);
 });
 
+// @desc Update user
+// @route PUT /users
+// @access Private
+const deleteUser = asyncHandler(async (req, res) => {
+  if (!req.params.id){
+    return res.status(400).json({ message: `ID parametr is required.` });
+  }
+  const user = await User.findOne({ _id: req.params.id})
+  if (!user) {
+    return res
+      .status(400)
+      .json({ message: `No user maches: ${req.params.id}.` });
+  }
+  const result = await User.deleteOne({ _id: req.params.id });
+  res.json(result);
+})
+
 module.exports = {
   getAllUsers,
   createNewUser,
   updateUser,
+  deleteUser
 };

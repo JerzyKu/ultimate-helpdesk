@@ -28,8 +28,10 @@ const login = asyncHandler(async (req, res) => {
   const accessToken = jwt.sign(
     {
       UserInfo: {
+        firstName: foundUser.firstName,
         username: foundUser.username,
         roles: foundUser.roles,
+        id: foundUser._id,
       },
     },
     process.env.ACCESS_TOKEN_SECRET,
@@ -77,8 +79,10 @@ const refresh = (req, res) => {
       const accessToken = jwt.sign(
         {
           UserInfo: {
+            firstName: foundUser.firstName,
             username: foundUser.username,
             roles: foundUser.roles,
+            id: foundUser._id,
           },
         },
         process.env.ACCESS_TOKEN_SECRET,

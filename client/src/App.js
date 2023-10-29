@@ -1,18 +1,18 @@
 import { Routes, Route } from "react-router-dom";
 
 import Layout from "./components/Layout";
-import Account from "./components/Account";
 import NotFound from "./components/NotFound";
 
-import Userslist from "./features/users/UsersList";
 import EditUser from "./features/users/EditUser";
+import Userslist from "./features/users/UsersList";
 import NewUserForm from "./features/users/NewUserForm";
 
+import EditAsset from "./features/assets/EditAsset";
 import AssetsList from "./features/assets/AssetsList";
 import NewAssetForm from "./features/assets/NewAssetForm";
-import EditAsset from "./features/assets/EditAsset";
 
 import Home from "./features/auth/Home";
+import Account from "./features/auth/Account";
 import Prefetch from "./features/auth/Prefetch";
 import LogInPage from "./features/auth/LogInPage";
 import RequireAuth from "./features/auth/RequireAuth";

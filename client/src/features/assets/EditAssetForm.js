@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
-import { useGetUsersQuery } from "../users/usersApiSlice";
+// import { useGetUsersQuery } from "../users/usersApiSlice";
 import {
   useDeleteAssetMutation,
   useUpdateAssetMutation,
@@ -13,18 +13,18 @@ import { useNavigate } from "react-router-dom";
 export default function EditAssetForm({ asset }) {
   const [name, setName] = useState(asset.name);
   const [invSymbol, setInvSymbol] = useState(asset.invSymbol);
-  const [userID, setUserID] = useState(asset?.ownerID ?? "none");
+  // const [userID, setUserID] = useState(asset?.ownerID ?? "none");
   const [serialNumber, setSerialNumber] = useState(asset.serialNumber);
 
   const navigate = useNavigate();
 
-  const {
-    data: users,
-    isLoading: isUsersLoading,
-    isSuccess: isUsersLoadingSucces,
-    isError: isUsersLoadingError,
-    error: usersLoadingError,
-  } = useGetUsersQuery();
+  // const {
+  //   data: users,
+  //   isLoading: isUsersLoading,
+  //   isSuccess: isUsersLoadingSucces,
+  //   isError: isUsersLoadingError,
+  //   error: usersLoadingError,
+  // } = useGetUsersQuery();
 
   const [
     deleteAsset,
@@ -40,20 +40,20 @@ export default function EditAssetForm({ asset }) {
     }
   }, [isDelSuccess]);
 
-  let options;
-  if (isUsersLoading) {
-    options = <option>Loading</option>;
-  }
-  if (isUsersLoadingSucces) {
-    const { ids } = users;
-    options = ids.map((id) => (
-      <option key={id} value={id} default>
-        {users.entities[id].username}
-      </option>
-    ));
-  }
+  // let options;
+  // if (isUsersLoading) {
+  //   options = <option>Loading</option>;
+  // }
+  // if (isUsersLoadingSucces) {
+  //   const { ids } = users;
+  //   options = ids.map((id) => (
+  //     <option key={id} value={id} default>
+  //       {users.entities[id].username}
+  //     </option>
+  //   ));
+  // }
 
-  const canSave = !isLoading || !isUsersLoading;
+  const canSave = !isLoading //|| !isUsersLoading;
 
   const onFormUpdate = async (e) => {
     e.preventDefault();
@@ -61,7 +61,7 @@ export default function EditAssetForm({ asset }) {
       id: asset.id,
       name,
       invSymbol,
-      ownerID: userID,
+      // ownerID: userID,
       serialNumber,
     });
   };
@@ -79,7 +79,7 @@ export default function EditAssetForm({ asset }) {
       variant="danger"
       onClick={onDeleteButtonClicked}
     >
-      {(isUsersLoading || isLoading) && <Spinner animation="grow" size="sm" />}
+      {(isLoading) && <Spinner animation="grow" size="sm" />}
       Delete
     </Button>
   );
@@ -94,8 +94,6 @@ export default function EditAssetForm({ asset }) {
       )}
       {isSuccess && <Alert variant="success">Success</Alert>}
       <h2>Edit Asset</h2>
-      {/* <hr />
-      {`${JSON.stringify(asset)}`} */}
       <hr />
       <Form onSubmit={onFormUpdate}>
         <Form.Group className="mb-3">
@@ -140,7 +138,7 @@ export default function EditAssetForm({ asset }) {
           />
         </Form.Group>
 
-        <Form.Group className="mb-3">
+        {/* <Form.Group className="mb-3">
           <Form.Label htmlFor="owner">Owner: </Form.Label>
           <Form.Select
             id="owner"
@@ -150,10 +148,10 @@ export default function EditAssetForm({ asset }) {
             {options}
             <option value={"none"}>none</option>
           </Form.Select>
-        </Form.Group>
+        </Form.Group> */}
 
         <Button type="Submit" disabled={!canSave}>
-          {(isUsersLoading || isLoading) && (
+          {(isLoading) && (
             <Spinner animation="grow" size="sm" />
           )}
           Update Asset

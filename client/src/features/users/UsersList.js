@@ -13,7 +13,7 @@ export default function Userslist() {
     isError,
     error,
   } = useGetUsersQuery(undefined, {
-    pollingInterval: 10000, // 10s <- change to prod
+    pollingInterval: 360000, // 360s <- change to prod
     refetchOnFocus: true,
     refetchOnMountOrArgChange: true,
   });
@@ -50,22 +50,22 @@ export default function Userslist() {
           <thead>
             <tr>
               <td>
-                <b>First Name:</b>
-              </td>
-              <td>
-                <b>Last Name:</b>
-              </td>
-              <td>
-                <b>Job Title:</b>
+                <b>Name:</b>
               </td>
               <td>
                 <b>User Name:</b>
               </td>
               <td>
-                <b>Active:</b>
+                <b>Job Title:</b>
               </td>
               <td>
+                <b>Active:</b>
+              </td>
+              {/* <td>
                 <b>Roles:</b>
+              </td> */}
+              <td>
+                <b>Actions:</b>
               </td>
             </tr>
           </thead>

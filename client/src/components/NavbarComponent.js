@@ -16,7 +16,7 @@ import { faFrog, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 export default function NavbarComponent() {
   // console.log(window.location.pathname);
   const navigate = useNavigate();
-  const { username } = useAuth()
+  const { username, firstName, isAdmin } = useAuth()
 
   const [sendLogout, { isLoading, isSuccess, isError, error }] =
     useSendLogoutMutation();
@@ -40,16 +40,17 @@ export default function NavbarComponent() {
               style={{ color: "#0b3805" }}
             />{" "}
             Ultimate HelpDesk
-          </Navbar.Brand>
+          </Navbar.Brand> 
           <Navbar.Toggle />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
               <CustomLink to="/">Home</CustomLink>
-              <CustomLink to="/assets" active>
+              <CustomLink to="/assets">
                 Assets
               </CustomLink>
-              <CustomLink to={`/users`}>Users</CustomLink>
-              <NavDropdown title={username} id="basic-nav-dropdown">
+              {isAdmin && <CustomLink to={`/users`}>Users</CustomLink>}
+              
+              <NavDropdown title={firstName ? firstName : username} id="basic-nav-dropdown">
                 <NavDropdown.Item as={Link} to={`/account`}>
                   Account
                 </NavDropdown.Item>

@@ -3,12 +3,12 @@ import { Link, useNavigate } from "react-router-dom";
 import usePersist from "../../hooks/usePersist";
 
 import Form from "react-bootstrap/Form";
-import Container from "react-bootstrap/Container";
-import Button from "react-bootstrap/Button";
 import Alert from "react-bootstrap/Alert";
+import Button from "react-bootstrap/Button";
+import Container from "react-bootstrap/Container";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleExclamation, faFrog } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useLoginMutation } from "./authApiSlice";
 import { setCredentials } from "./authSlice";
 import { useDispatch } from "react-redux";
@@ -25,7 +25,7 @@ export default function LogInPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const [login, { isLoading }] = useLoginMutation();
+  const [login, { isLoading, isError, error }] = useLoginMutation();
 
   useEffect(() => {
     loginRef.current.focus();
@@ -48,6 +48,7 @@ export default function LogInPage() {
       setUsername("");
       navigate("/");
     } catch (err) {
+      
       if (!err.status) {
         setErrorMsg("No Server Response.");
       } else if (err.status === 400) {
@@ -55,7 +56,8 @@ export default function LogInPage() {
       } else if (err.status === 401) {
         setErrorMsg("Unauthorized.");
       } else {
-        setErrorMsg(err.data?.message);
+        // setErrorMsg(err.data?.message);
+        setErrorMsg(JSON.stringify(err));
       }
     }
   };
@@ -71,6 +73,11 @@ export default function LogInPage() {
       {errorMsg && (
         <Alert variant={"danger"}>
           <FontAwesomeIcon icon={faCircleExclamation} /> {errorMsg}
+        </Alert>
+      )}
+      {isError && (
+        <Alert variant={"danger"}>
+          <FontAwesomeIcon icon={faCircleExclamation} /> {JSON.stringify(error)}
         </Alert>
       )}
       <Form onSubmit={handleSubmit}>
