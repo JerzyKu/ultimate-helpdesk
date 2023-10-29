@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSave } from "@fortawesome/free-solid-svg-icons";
+import { faSave, faTrash } from "@fortawesome/free-solid-svg-icons";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Alert from "react-bootstrap/Alert";
-// import { useNavigate } from "react-router-dom";
-import { useUpdateUserMutation } from "./usersApiSlice";
+import { useNavigate } from "react-router-dom";
+import { useDeleteUserMutation, useUpdateUserMutation } from "./usersApiSlice";
 import Select from "react-select";
 import { ROLES } from "../../config/roles";
 
@@ -15,7 +15,12 @@ export default function EditUserForm({ user }) {
   const [updateUser, { isLoading, isSuccess, isError, error }] =
     useUpdateUserMutation();
 
-  // const navigate = useNavigate();
+  const [
+    deleteUser,
+    { isSuccess: idDelSuccess, isError: isDelError, delError },
+  ] = useDeleteUserMutation();
+
+  const navigate = useNavigate();
 
   const [username, setUsername] = useState(user.username);
   const [password, setPassword] = useState("");
@@ -25,33 +30,27 @@ export default function EditUserForm({ user }) {
   const [jobTitle, setJobTitle] = useState(user?.jobTitle);
   const [email, setemail] = useState(user?.email);
   const [active, setActive] = useState(user.active);
-  const [roles, setRoles] = useState(user.roles.map((el) => ({
-    value: el,
-    label: el,
-  })))
-
-  // console.log("roes map ", roles.map( el =>  el.value ? el.value : el ));
-
-  // console.log("roles ",roles);
+  const [roles, setRoles] = useState(
+    user.roles.map((el) => ({
+      value: el,
+      label: el,
+    }))
+  );
 
   useEffect(() => {
     setValidPassword(PWD_REGEX.test(password));
   }, [password]);
 
-  // useEffect(() => {
-  //   if (isSuccess) {
-  //     setUsername('')
-  //     setPassword('')
-  //   //   setRoles([])
-  //     navigate('/users')
-  //   }
-  // }, [isSuccess, navigate])
+  useEffect(() => {
+    if (idDelSuccess) {
+      navigate("/users");
+    }
+  }, [idDelSuccess, navigate]);
 
   const canUpdate = true; //[validUsername, validPassword].every(Boolean) && !isLoading
 
   const onUpdateUseClicked = async (e) => {
-
-    const selectedRoles = roles.map( el => el.value )
+    const selectedRoles = roles.map((el) => el.value);
 
     console.log(selectedRoles);
 
@@ -65,7 +64,7 @@ export default function EditUserForm({ user }) {
         jobTitle,
         email,
         active,
-        roles: selectedRoles
+        roles: selectedRoles,
       });
     }
   };
@@ -75,59 +74,69 @@ export default function EditUserForm({ user }) {
     label: el,
   }));
 
+  const onDeleteButtonClicked = () => {
+    deleteUser({ id: user.id });
+  };
+
+  const deleteAlert = null;
+  if (isDelError) {
+    <Alert variant="danger">error: {JSON.stringify(delError)}</Alert>;
+  }
+
   const content = (
     <>
+      {deleteAlert}
       {isError && (
         <Alert variant="danger">error: {JSON.stringify(error)}</Alert>
       )}
       {isSuccess && <Alert variant="success">Success</Alert>}
       <h2>Edit User</h2>
       <Form className="form" onSubmit={onUpdateUseClicked}>
-        <Form.Group className="mb-3" controlId="user">
-          <Form.Group className="mb-3" controlId="firstName">
-            <Form.Label>First Name:</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter First Name"
-              autoComplete="off"
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
-            />
-          </Form.Group>
+        <Form.Group className="mb-3" controlId="firstName">
+          <Form.Label>First Name:</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Enter First Name"
+            autoComplete="off"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+          />
+        </Form.Group>
 
-          <Form.Group className="mb-3" controlId="lastName">
-            <Form.Label>Last Name:</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter Last Name"
-              autoComplete="off"
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
-            />
-          </Form.Group>
+        <Form.Group className="mb-3" controlId="lastName">
+          <Form.Label>Last Name:</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Enter Last Name"
+            autoComplete="off"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+          />
+        </Form.Group>
 
-          <Form.Group className="mb-3" controlId="jobTitle">
-            <Form.Label>Job Title:</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter Job Title"
-              autoComplete="off"
-              value={jobTitle}
-              onChange={(e) => setJobTitle(e.target.value)}
-            />
-          </Form.Group>
+        <Form.Group className="mb-3" controlId="jobTitle">
+          <Form.Label>Job Title:</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Enter Job Title"
+            autoComplete="off"
+            value={jobTitle}
+            onChange={(e) => setJobTitle(e.target.value)}
+          />
+        </Form.Group>
 
-          <Form.Group className="mb-3" controlId="email">
-            <Form.Label>email:</Form.Label>
-            <Form.Control
-              type="email"
-              placeholder="Enter email"
-              autoComplete="off"
-              value={email}
-              onChange={(e) => setemail(e.target.value)}
-            />
-          </Form.Group>
+        <Form.Group className="mb-3" controlId="email">
+          <Form.Label>email:</Form.Label>
+          <Form.Control
+            type="email"
+            placeholder="Enter email"
+            autoComplete="off"
+            value={email}
+            onChange={(e) => setemail(e.target.value)}
+          />
+        </Form.Group>
 
+        <Form.Group className="mb-3" controlId="Username">
           <Form.Label>Username:</Form.Label>
           <Form.Control
             // isValid={validUsername}
@@ -184,6 +193,17 @@ export default function EditUserForm({ user }) {
           type="Submit"
         >
           <FontAwesomeIcon icon={faSave} /> Update User
+        </Button>
+
+        <Button
+          className="icon-button"
+          title="Delete"
+          // disabled={!canSave}
+          // type="Submit"
+          variant="danger"
+          onClick={onDeleteButtonClicked}
+        >
+          <FontAwesomeIcon icon={faTrash} /> Delete User
         </Button>
       </Form>
     </>
