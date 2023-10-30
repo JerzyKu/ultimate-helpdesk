@@ -32,7 +32,7 @@ export default function EditAssetForm({ asset }) {
     }
   }, [isDelSuccess, navigate]);
 
-  const canSave = !isLoading //|| !isUsersLoading;
+  const canSave = !isLoading
 
   const onFormUpdate = async (e) => {
     e.preventDefault();
