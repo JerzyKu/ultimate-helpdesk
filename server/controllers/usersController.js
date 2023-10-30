@@ -1,4 +1,5 @@
 const User = require("../models/User");
+const Asset = require('../models/Asset')
 const bcrypt = require("bcryptjs");
 
 const asyncHandler = require("express-async-handler");
@@ -103,6 +104,14 @@ const deleteUser = asyncHandler(async (req, res) => {
       .status(400)
       .json({ message: `No user maches: ${req.params.id}.` });
   }
+
+  const assets = Asset.findOne({ownerId: req.params.id})
+  if(assets){
+    return res
+      .status(400)
+      .json({ message: `Cannot delete user that have issued assets.` });
+  }
+
   const result = await User.deleteOne({ _id: req.params.id });
   res.json(result);
 })
