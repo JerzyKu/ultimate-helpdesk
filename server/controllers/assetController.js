@@ -6,7 +6,7 @@ const asyncHandler = require("express-async-handler");
 // @route POSt  /assets
 // @access Private
 const createNewAsset = asyncHandler(async (req, res) => {
-  const { name, invSymbol, userID, serialNumber } = req.body;
+  const { name, invSymbol, serialNumber } = req.body;
 
   //confirm data
   if (!name || !invSymbol) {
@@ -17,9 +17,6 @@ const createNewAsset = asyncHandler(async (req, res) => {
 
   // const assetObj = { name, invSymbol, ownerID: userID };
   const assetObj = { name, invSymbol, serialNumber };
-  if (userID) {
-    assetObj.ownerID = userID;
-  }
 
   //   console.log(`assetObj`, assetObj);
 
