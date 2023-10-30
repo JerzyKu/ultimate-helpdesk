@@ -30,7 +30,7 @@ export default function EditAssetForm({ asset }) {
     if (isDelSuccess) {
       navigate(`/assets`);
     }
-  }, [isDelSuccess]);
+  }, [isDelSuccess, navigate]);
 
   const canSave = !isLoading //|| !isUsersLoading;
 
