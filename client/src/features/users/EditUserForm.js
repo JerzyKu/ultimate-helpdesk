@@ -189,7 +189,7 @@ export default function EditUserForm({ user }) {
         <Button
           className="icon-button"
           title="Save"
-          // disabled={!canSave}
+          disabled={isLoading}
           type="Submit"
         >
           <FontAwesomeIcon icon={faSave} /> Update User
