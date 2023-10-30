@@ -12,6 +12,7 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 //font awsome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFrog, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+import Alert from "react-bootstrap/Alert";
 
 export default function NavbarComponent() {
   // console.log(window.location.pathname);
@@ -23,10 +24,15 @@ export default function NavbarComponent() {
 
   useEffect(() => {
     if (isSuccess) navigate("/login");
-  }, [isSuccess, navigate]);
+  }, [isSuccess]);
+
+  let logoutErrorAlert = null;
+  if (isError) {
+    logoutErrorAlert = <Alert variant="danger">error: {JSON.stringify(error)}</Alert>;
+  }
 
   return (
-    <>
+    <>{logoutErrorAlert}
       <Navbar
         expand="lg"
         className="m-2 rounded-1"
