@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { useAddNewAssetMutation } from "./assetsApiSlice";
 import { useGetUsersQuery } from "../users/usersApiSlice";
@@ -11,7 +11,6 @@ import Spinner from "react-bootstrap/Spinner";
 export default function NewAssetForm() {
   const [name, setName] = useState("");
   const [invSymbol, setInvSymbol] = useState("");
-  const [userID, setUserID] = useState("");
   const [serialNumber, setSerialNumber] = useState('')
 
   const [addNewAsset, { isLoading, isSuccess, isError, error }] =
@@ -25,17 +24,12 @@ export default function NewAssetForm() {
     error: usersLoadingError,
   } = useGetUsersQuery();
 
-  // useEffect(() => {
-  //   setUserID(users.entities[users.ids[0]].id)
-  //   // eslint-disable-next-line
-  // },[isUsersLoadingSucces])
-
   const canSave = [name.length, invSymbol.length].every(Boolean) && !isLoading;
 
   const onSaveAssetClicked = async (e) => {
     e.preventDefault();
     if (canSave) {
-      await addNewAsset({ name, invSymbol, userID, serialNumber });
+      await addNewAsset({ name, invSymbol, serialNumber });
     }
   };
 
@@ -108,18 +102,6 @@ export default function NewAssetForm() {
             // isValid
           />
         </Form.Group>
-
-        {/* <Form.Group className="mb-3">
-          <Form.Label htmlFor="owner">Owner: </Form.Label>
-          <Form.Select
-            id="owner"
-            value={userID}
-            onChange={(e) => setUserID(e.target.value)}
-          >
-            {options}
-            <option value={''}>none</option>
-          </Form.Select>
-        </Form.Group> */}
 
         <Button type="Submit" disabled={!canSave}>
           {isLoading && <Spinner animation="grow" size="sm" />}
