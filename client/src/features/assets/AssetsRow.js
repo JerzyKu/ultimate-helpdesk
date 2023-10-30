@@ -27,13 +27,15 @@ export default function AssetsRow({ assetId }) {
           </td>
           <td>
             {isAdmin && (
-              <Button variant="primary">
-                <FontAwesomeIcon
-                  className="cursor-pointer"
-                  icon={faPenToSquare}
-                  onClick={() => navigate(`${asset.id}`)}
-                />
-              </Button>
+              <>
+                <Button variant="primary">
+                  <FontAwesomeIcon
+                    className="cursor-pointer"
+                    icon={faPenToSquare}
+                    onClick={() => navigate(`${asset.id}`)}
+                  />
+                </Button>{" "}
+              </>
             )}
             {!asset.ownerID ? (
               <IssueAsset asset={asset} />
