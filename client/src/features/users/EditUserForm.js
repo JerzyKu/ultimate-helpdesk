@@ -193,7 +193,7 @@ export default function EditUserForm({ user }) {
           type="Submit"
         >
           <FontAwesomeIcon icon={faSave} /> Update User
-        </Button>
+        </Button>{" "}
 
         <Button
           className="icon-button"
