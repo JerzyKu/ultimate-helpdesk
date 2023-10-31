@@ -4,15 +4,15 @@ import { useSendLogoutMutation } from "../features/auth/authApiSlice";
 import useAuth from "../hooks/useAuth";
 
 //bootstrap
-import Container from "react-bootstrap/Container";
-import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
+import Alert from "react-bootstrap/Alert";
+import Navbar from "react-bootstrap/Navbar";
+import Container from "react-bootstrap/Container";
 import NavDropdown from "react-bootstrap/NavDropdown";
 
 //font awsome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFrog, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
-import Alert from "react-bootstrap/Alert";
 
 export default function NavbarComponent() {
   // console.log(window.location.pathname);
@@ -39,7 +39,7 @@ export default function NavbarComponent() {
         style={{ backgroundColor: "#006A4E", color: "white" }}
       >
         <Container>
-          <Navbar.Brand as={Link} to="/">
+          <Navbar.Brand as={Link} to="/home">
             <FontAwesomeIcon
               icon={faFrog}
               bounce
@@ -50,7 +50,7 @@ export default function NavbarComponent() {
           <Navbar.Toggle />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <CustomLink to="/">Home</CustomLink>
+              <CustomLink to="/home">Home</CustomLink>
               <CustomLink to="/assets">
                 Assets
               </CustomLink>
@@ -75,7 +75,7 @@ export default function NavbarComponent() {
 
 function CustomLink({ to, children, ...props }) {
   const resolvedPath = useResolvedPath(to);
-  const isActive = useMatch({ path: resolvedPath.pathname }); // end: true
+  const isActive = useMatch({ path: resolvedPath.pathname, end: false}); // 
   return (
     <Nav.Link as={Link} to={to} {...props} active={isActive}>
       {children}

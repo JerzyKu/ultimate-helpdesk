@@ -29,6 +29,7 @@ function App() {
           <Route element={<RequireAuth allowedRoles={[...Object.values(ROLES)]} />}>
             <Route element={<Prefetch />}>
               <Route index element={<Home />} />
+              <Route path="home" element={<Home />} />
               <Route path="users">
                 <Route index element={<Userslist />} />
                 <Route path=":id" element={<EditUser />} />

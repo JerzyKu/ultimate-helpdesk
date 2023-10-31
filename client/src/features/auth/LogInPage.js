@@ -46,7 +46,7 @@ export default function LogInPage() {
       dispatch(setCredentials({ accessToken }));
       setPassword("");
       setUsername("");
-      navigate("/");
+      navigate("/home");
     } catch (err) {
       
       if (!err.status) {

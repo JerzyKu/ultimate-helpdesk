@@ -1,28 +1,19 @@
 import { useState } from "react";
 
 import { useAddNewAssetMutation } from "./assetsApiSlice";
-import { useGetUsersQuery } from "../users/usersApiSlice";
 
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Alert from "react-bootstrap/Alert";
-import Spinner from "react-bootstrap/Spinner";
+import Spinner from "react-bootstrap/Spinner"; 
 
 export default function NewAssetForm() {
-  const [name, setName] = useState("");
+  const [name, setName] = useState(""); 
   const [invSymbol, setInvSymbol] = useState("");
   const [serialNumber, setSerialNumber] = useState('')
 
   const [addNewAsset, { isLoading, isSuccess, isError, error }] =
     useAddNewAssetMutation();
-
-  const {
-    data: users,
-    isLoading: isUsersLoading,
-    isSuccess: isUsersLoadingSucces,
-    isError: isUsersLoadingError,
-    error: usersLoadingError,
-  } = useGetUsersQuery();
 
   const canSave = [name.length, invSymbol.length].every(Boolean) && !isLoading;
 
@@ -33,30 +24,13 @@ export default function NewAssetForm() {
     }
   };
 
-  let options
-  if (isUsersLoading) {
-    options = <option>Loading</option>;
-  }
-  if (isUsersLoadingSucces) {
-    const { ids } = users;
-    options = ids.map((id) => (
-      <option key={id} value={id} default>
-        {users.entities[id].username}
-      </option>
-    ));
-  }
-
   return (
     <>
       <h2>Add new Asset</h2>
       {isError && (
         <Alert variant="danger">error: {JSON.stringify(error)}</Alert>
       )}
-      {isUsersLoadingError && (
-        <Alert variant="danger">
-          error: {JSON.stringify(usersLoadingError)}
-        </Alert>
-      )}
+
       {isSuccess && <Alert variant="success">Asset Added</Alert>}
       <hr />
       <Form onSubmit={onSaveAssetClicked}>
