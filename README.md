@@ -1,3 +1,5 @@
+# Roles table
+
 |         roles | admin | Helpdesk |             user             |
 | ------------: | :---: | :------: | :--------------------------: |
 |  create asset |   V   |    X     |              X               |
@@ -7,14 +9,14 @@
 |   issue asset |   V   |    V     |              X               |
 | unissue asset |   V   |    V     |              X               |
 
-Know bugs:
+# Know bugs:
 
 - [fixed] can issue asset to inactive user
 - [fixed] can delete issued asset
 - [fixed] can delete user which have assign assets
 
 
-Api endpoints: 
+# Api endpoints: 
 
 POST /auth
 
@@ -49,6 +51,6 @@ DELETE /users/{:id}
 // --- //
 
 
-uwagi Szymona: 
+# uwagi Szymona: 
  - Po najechaniu na ikonę nie wyświetla się opis wykonywanej funkcji
  - ogarnąć errory w alertach
