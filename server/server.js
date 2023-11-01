@@ -15,7 +15,6 @@ const PORT = process.env.PORT || 3500;
 connectDB()
 
 // Cross Origin Resource Sharing
-app.use(cors(corsOptions))
 
 // built-in middleware to handle urlencoded form data
 app.use(express.urlencoded({ extended: false }));
@@ -28,6 +27,7 @@ app.use(cookieParser())
 
 // custom middleware for loggin actions 
 app.use(logger)
+app.use(cors(corsOptions))
 
 // // simulate delay response
 // app.use((req, res, next) => {
